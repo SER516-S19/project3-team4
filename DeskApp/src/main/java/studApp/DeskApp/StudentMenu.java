@@ -15,16 +15,13 @@ import java.awt.Dimension;
 
 public class StudentMenu {
 
-	//JFrame.setDefaultLookAndFeelDecorated(true);
 	JFrame quiz = new JFrame("Student Quiz Application");
 	JPanel quizPanel = new JPanel();
 	JLabel message = new JLabel("Select a quiz you want to start : ");
 	String[] quizzes = { "Quiz 1", "Quiz 2", "Quiz 3", "Quiz 4", "Quiz 5", "Quiz 6" };
 	final JComboBox<String> quizMenu = new JComboBox<String>(quizzes);
 	JButton startQuiz = new JButton("Start Quiz");
-
 	BoxLayout boxlayout = new BoxLayout(quizPanel, BoxLayout.Y_AXIS);
-
 
 	public StudentMenu() {
 
@@ -49,19 +46,6 @@ public class StudentMenu {
     	quiz.add(quizPanel);
 		quiz.setVisible(true);
 
-		// menu.addActionListener(new ActionListener() {
-
-		// 	public void actionPerformed(ActionEvent e) {
-		// 		String x = String.valueOf(menu.getSelectedItem());
-		// 		Qc.selectedTitle(x);
-
-		// 	}
-		// });
-
 	}
 	
-	public static void main(String[] args) {
-		new  StudentMenu();
-	
-}
 }

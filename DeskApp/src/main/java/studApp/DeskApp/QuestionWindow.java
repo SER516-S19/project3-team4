@@ -1,31 +1,32 @@
 package studApp.DeskApp;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Dimension;
+import javax.swing.SwingConstants;
 
 /**
- * Application window for asking a question. I
+ * Application window for asking a question. This version is just a 
+ * skeleton for the UI. It will need to be updated to take in a quiz
+ * question and re-render the components. 
  * @author paulhorton
- *
+ * @version 1.0
  */
 public class QuestionWindow {
 
@@ -53,8 +54,14 @@ public class QuestionWindow {
 	 */
 	public QuestionWindow() {
 		// TODO: These values are temporary and will be grabbed from the database business objects
-		String question = "Here is a question. The question may be super long or not. Who cares? I sure don't!";
-		String[] answers = {"Here is an answer", "Here is another answer", "Here is yet another answer", "Here is the final answer"};
+		String question = "Here is a question. The question may be super long or not. "
+				+ "Who cares? I sure don't!";
+		String[] answers = {
+				"Here is an answer", 
+				"Here is another answer", 
+				"Here is yet another answer", 
+				"Here is the final answer"
+				};
 		initialize(question,answers);
 	}
 

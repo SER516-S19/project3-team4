@@ -14,7 +14,7 @@ import java.awt.Font;
 public class ApplicationWindow extends JFrame {
 	public ApplicationWindow() {
 		getContentPane().setLayout(new BoxLayout(getContentPane(), BoxLayout.X_AXIS));
-		
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		JPanel panel = new JPanel();
 		getContentPane().add(panel);
 		panel.setLayout(null);
@@ -24,12 +24,12 @@ public class ApplicationWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		jButtonCreate.setBounds(78, 143, 89, 23);
+		jButtonCreate.setBounds(78, 143, 110, 33);
 		panel.add(jButtonCreate);
 		
 		JButton jButtonEdit = new JButton("Edit Quiz");
 	
-		jButtonEdit.setBounds(254, 143, 89, 23);
+		jButtonEdit.setBounds(254, 143, 89, 33);
 		panel.add(jButtonEdit);
 		
 		JLabel jLblWelcome = new JLabel("Welcome to the Quiz App");

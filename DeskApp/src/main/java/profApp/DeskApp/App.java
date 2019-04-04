@@ -23,9 +23,10 @@ public class App
     	{
     		File dirName = jFile.getSelectedFile();
     		QuizConstants.directoryName = dirName.getAbsolutePath();
-    		//System.out.println(QuizConstants.directoryName);
+    		
     	}
         ApplicationWindow appWindow = new ApplicationWindow();
+        appWindow.setVisible(true);
        
     }
 }

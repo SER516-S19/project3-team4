@@ -3,6 +3,7 @@ package profApp.DeskApp;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -10,10 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
 import java.awt.Font;
+import javax.swing.JRadioButton;
 
 public class editNextFrame extends JFrame {
 
 	private JPanel contentPane;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	
 
 	/**
 	 * Launch the application.
@@ -24,6 +28,7 @@ public class editNextFrame extends JFrame {
 				try {
 					editNextFrame frame = new editNextFrame();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -46,6 +51,16 @@ public class editNextFrame extends JFrame {
 		lblNewLabel.setFont(new Font("Century Gothic", Font.PLAIN, 14));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblNewLabel, BorderLayout.NORTH);
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("New radio button");
+		rdbtnNewRadioButton.setHorizontalAlignment(SwingConstants.LEFT);
+		buttonGroup.add(rdbtnNewRadioButton);
+		contentPane.add(rdbtnNewRadioButton, BorderLayout.WEST);
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("New radio button");
+		rdbtnNewRadioButton_1.setHorizontalAlignment(SwingConstants.LEFT);
+		buttonGroup.add(rdbtnNewRadioButton_1);
+		contentPane.add(rdbtnNewRadioButton_1, BorderLayout.CENTER);
 	}
 
 }

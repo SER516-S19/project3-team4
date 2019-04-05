@@ -14,6 +14,7 @@ public class App
 {
     public static void main( String[] args )
     {
+    	//test
     	JFileChooser jFile =  new JFileChooser();
     	jFile.setDialogTitle("Select directory");
     	jFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);

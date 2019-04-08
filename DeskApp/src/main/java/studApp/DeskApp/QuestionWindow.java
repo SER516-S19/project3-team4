@@ -94,6 +94,7 @@ public class QuestionWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
+		// Panel for Question at the top of the page
 		JPanel questionPanel = new JPanel();
 		frame.getContentPane().add(questionPanel, BorderLayout.NORTH);
 		
@@ -118,6 +119,7 @@ public class QuestionWindow {
 		);
 		questionPanel.setLayout(gl_questionPanel);
 		
+		// Panel for buttons at the bottom of the page
 		JPanel buttonPanel = new JPanel();
 		frame.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
@@ -128,6 +130,7 @@ public class QuestionWindow {
 		giveUpButton.setPreferredSize(new Dimension(100, 29));
 		giveUpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// TODO: Create controller with give up method to close window. 
 			}
 		});
 		
@@ -138,6 +141,7 @@ public class QuestionWindow {
 		skipButton.setPreferredSize(new Dimension(100, 29));
 		skipButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// TODO: Create controller with skip method to skip a question and leave it unanswered. 
 			}
 		});
 		
@@ -147,6 +151,7 @@ public class QuestionWindow {
 		nextButton.setMaximumSize(new Dimension(100, 29));
 		nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// TODO: Create controller with next method to update to next question and check if current question is correct;
 			}
 		});
 		GroupLayout gl_buttonPanel = new GroupLayout(buttonPanel);
@@ -172,6 +177,7 @@ public class QuestionWindow {
 		);
 		buttonPanel.setLayout(gl_buttonPanel);
 		
+		// Panel for answers in the middle of the page 
 		JPanel answerPanel = new JPanel();
 		frame.getContentPane().add(answerPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_answerPanel = new GridBagLayout();
@@ -181,43 +187,16 @@ public class QuestionWindow {
 		gbl_answerPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		answerPanel.setLayout(gbl_answerPanel);
 		
-		JRadioButton answerButtonA = new JRadioButton();
-		answerButtonA.setAlignmentX(Component.CENTER_ALIGNMENT);
-		answerButtons.add(answerButtonA);
-		GridBagConstraints gbc_answerButtonA = new GridBagConstraints();
-		gbc_answerButtonA.anchor = GridBagConstraints.WEST;
-		gbc_answerButtonA.insets = new Insets(0, 0, 5, 0);
-		gbc_answerButtonA.gridx = 1;
-		gbc_answerButtonA.gridy = 1;
-		answerPanel.add(answerButtonA, gbc_answerButtonA);
-		
-		JRadioButton answerButtonB = new JRadioButton();
-		answerButtonB.setAlignmentX(Component.CENTER_ALIGNMENT);
-		answerButtons.add(answerButtonB);
-		GridBagConstraints gbc_answerButtonB = new GridBagConstraints();
-		gbc_answerButtonB.anchor = GridBagConstraints.WEST;
-		gbc_answerButtonB.insets = new Insets(0, 0, 5, 0);
-		gbc_answerButtonB.gridx = 1;
-		gbc_answerButtonB.gridy = 2;
-		answerPanel.add(answerButtonB, gbc_answerButtonB);
-		
-		JRadioButton answerButtonC = new JRadioButton();
-		answerButtonC.setAlignmentX(Component.CENTER_ALIGNMENT);
-		answerButtons.add(answerButtonC);
-		GridBagConstraints gbc_answerButtonC = new GridBagConstraints();
-		gbc_answerButtonC.anchor = GridBagConstraints.WEST;
-		gbc_answerButtonC.insets = new Insets(0, 0, 5, 0);
-		gbc_answerButtonC.gridx = 1;
-		gbc_answerButtonC.gridy = 3;
-		answerPanel.add(answerButtonC, gbc_answerButtonC);
-		
-		JRadioButton answerButtonD = new JRadioButton();
-		answerButtonD.setHorizontalAlignment(SwingConstants.LEFT);
-		answerButtons.add(answerButtonD);
-		GridBagConstraints gbc_answerButtonD = new GridBagConstraints();
-		gbc_answerButtonD.anchor = GridBagConstraints.WEST;
-		gbc_answerButtonD.gridx = 1;
-		gbc_answerButtonD.gridy = 4;
-		answerPanel.add(answerButtonD, gbc_answerButtonD);
+		for(int i = 0; i < 4; i++) {
+			JRadioButton answerButton = new JRadioButton();
+			answerButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+			answerButtons.add(answerButton);
+			GridBagConstraints gbc_answerButton = new GridBagConstraints();
+			gbc_answerButton.anchor = GridBagConstraints.WEST;
+			gbc_answerButton.insets = new Insets(0, 0, 5, 0);
+			gbc_answerButton.gridx = 1;
+			gbc_answerButton.gridy = 1 + i;
+			answerPanel.add(answerButton, gbc_answerButton);
+		}
 	}
 }

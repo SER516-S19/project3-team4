@@ -21,7 +21,6 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.SwingConstants;
 
 /**
  * Application window for asking a question. This version is just a 

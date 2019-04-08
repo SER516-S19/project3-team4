@@ -9,7 +9,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
 
+import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -26,21 +28,32 @@ import javax.swing.SwingConstants;
  * skeleton for the UI. It will need to be updated to take in a quiz
  * question and re-render the components. 
  * @author paulhorton
- * @version 1.0
+ * @version 1.1
  */
 public class QuestionWindow {
 
 	private JFrame frame;
-	private final ButtonGroup answerButtons = new ButtonGroup();
+	private ButtonGroup answerButtons = new ButtonGroup();
+	private JTextArea txtrQuestion = new JTextArea();
+
 
 	/**
-	 * Launch the application.
+	 * Launch the application. TODO: This is for testing and will need to be deleted in the final version
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					QuestionWindow window = new QuestionWindow();
+					String question = "Here is a question. The question may be super long or not. "
+							+ "Who cares? I sure don't!";
+					String[] answers = {
+							"Here is an answer", 
+							"Here is another answer", 
+							"Here is yet another answer", 
+							"Here is the final answer"
+							};
+					window.update(question, answers);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -53,22 +66,29 @@ public class QuestionWindow {
 	 * Create the application.
 	 */
 	public QuestionWindow() {
-		// TODO: These values are temporary and will be grabbed from the database business objects
-		String question = "Here is a question. The question may be super long or not. "
-				+ "Who cares? I sure don't!";
-		String[] answers = {
-				"Here is an answer", 
-				"Here is another answer", 
-				"Here is yet another answer", 
-				"Here is the final answer"
-				};
-		initialize(question,answers);
+		initialize();
 	}
-
+	
 	/**
-	 * Initialize the contents of the frame.
+	 * Updates the frame to include new question and answer information. 
+	 * @param question String of a question
+	 * @param answers Array of strings of answers
 	 */
-	private void initialize(String question, String[] answers) {
+	public void update(String question, String[]answers) {
+		txtrQuestion.setText(question);
+		int i = 0;
+		Enumeration<AbstractButton> buttons = answerButtons.getElements();
+		while(buttons.hasMoreElements()) {
+        	buttons.nextElement().setText(answers[i]);
+        	i++;
+		}
+	}
+	
+	/**
+	 * Initializes the JFrame with all the necessary components.
+	 * No text is populated initially and must be done with an update.
+	 */
+	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,13 +97,11 @@ public class QuestionWindow {
 		JPanel questionPanel = new JPanel();
 		frame.getContentPane().add(questionPanel, BorderLayout.NORTH);
 		
-		JTextArea txtrQuestion = new JTextArea();
 		txtrQuestion.setWrapStyleWord(true);
 		txtrQuestion.setOpaque(false);
 		txtrQuestion.setRequestFocusEnabled(false);
 		txtrQuestion.setEditable(false);
 		txtrQuestion.setLineWrap(true);
-		txtrQuestion.setText(question);
 		GroupLayout gl_questionPanel = new GroupLayout(questionPanel);
 		gl_questionPanel.setHorizontalGroup(
 			gl_questionPanel.createParallelGroup(Alignment.LEADING)
@@ -102,7 +120,7 @@ public class QuestionWindow {
 		
 		JPanel buttonPanel = new JPanel();
 		frame.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
-		
+
 		JButton giveUpButton = new JButton("Give Up");
 		giveUpButton.setMargin(new Insets(0, 2, 0, 0));
 		giveUpButton.setMinimumSize(new Dimension(100, 29));
@@ -163,7 +181,7 @@ public class QuestionWindow {
 		gbl_answerPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		answerPanel.setLayout(gbl_answerPanel);
 		
-		JRadioButton answerButtonA = new JRadioButton(answers[0]);
+		JRadioButton answerButtonA = new JRadioButton();
 		answerButtonA.setAlignmentX(Component.CENTER_ALIGNMENT);
 		answerButtons.add(answerButtonA);
 		GridBagConstraints gbc_answerButtonA = new GridBagConstraints();
@@ -173,7 +191,7 @@ public class QuestionWindow {
 		gbc_answerButtonA.gridy = 1;
 		answerPanel.add(answerButtonA, gbc_answerButtonA);
 		
-		JRadioButton answerButtonB = new JRadioButton(answers[1]);
+		JRadioButton answerButtonB = new JRadioButton();
 		answerButtonB.setAlignmentX(Component.CENTER_ALIGNMENT);
 		answerButtons.add(answerButtonB);
 		GridBagConstraints gbc_answerButtonB = new GridBagConstraints();
@@ -183,7 +201,7 @@ public class QuestionWindow {
 		gbc_answerButtonB.gridy = 2;
 		answerPanel.add(answerButtonB, gbc_answerButtonB);
 		
-		JRadioButton answerButtonC = new JRadioButton(answers[2]);
+		JRadioButton answerButtonC = new JRadioButton();
 		answerButtonC.setAlignmentX(Component.CENTER_ALIGNMENT);
 		answerButtons.add(answerButtonC);
 		GridBagConstraints gbc_answerButtonC = new GridBagConstraints();
@@ -193,7 +211,7 @@ public class QuestionWindow {
 		gbc_answerButtonC.gridy = 3;
 		answerPanel.add(answerButtonC, gbc_answerButtonC);
 		
-		JRadioButton answerButtonD = new JRadioButton(answers[3]);
+		JRadioButton answerButtonD = new JRadioButton();
 		answerButtonD.setHorizontalAlignment(SwingConstants.LEFT);
 		answerButtons.add(answerButtonD);
 		GridBagConstraints gbc_answerButtonD = new GridBagConstraints();

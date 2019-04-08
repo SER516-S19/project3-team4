@@ -15,7 +15,7 @@ public class App
     public static void main( String[] args )
     {
     	//test
-    	JFileChooser jFile =  new JFileChooser();
+    	/**JFileChooser jFile =  new JFileChooser();
     	jFile.setDialogTitle("Select directory");
     	jFile.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
     	jFile.setAcceptAllFileFilterUsed(false);
@@ -25,7 +25,7 @@ public class App
     		File dirName = jFile.getSelectedFile();
     		QuizConstants.directoryName = dirName.getAbsolutePath();
     		
-    	}
+    	}**/
         ApplicationWindow appWindow = new ApplicationWindow();
         appWindow.setVisible(true);
        

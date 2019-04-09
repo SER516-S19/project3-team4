@@ -1,36 +1,67 @@
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Box;
+import javax.swing.border.EmptyBorder;
+import java.awt.Insets;
+import java.awt.Dimension;
 
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+public class StudentMenu {
 
-public class StudentMenu  {
-	JFrame frame = new JFrame("Student Quiz Application");
-	JPanel panel = new JPanel();
-	String quizzes[] = { "Quiz1", "Quiz2", "Quiz3", "Quiz4", "Quiz5" };
-	JComboBox comboBox= new JComboBox(quizzes);
-	JButton button = new JButton("Take Quiz");
-	JLabel pageName = new JLabel("Welcome to Student Menu !!", SwingConstants.CENTER);
-	//pageName.setFont(new Font("Serif", Font.PLAIN, 14));
+	//JFrame.setDefaultLookAndFeelDecorated(true);
+	JFrame quiz = new JFrame("Student Quiz Application");
+	JPanel quizPanel = new JPanel();
+	JLabel message = new JLabel("Select a quiz you want to start : ");
+	String[] quizzes = { "Quiz 1", "Quiz 2", "Quiz 3", "Quiz 4", "Quiz 5", "Quiz 6" };
+	final JComboBox<String> quizMenu = new JComboBox<String>(quizzes);
+	JButton startQuiz = new JButton("Start Quiz");
 
-	JLabel selectQuizName = new JLabel("Select Quiz"); 
+	BoxLayout boxlayout = new BoxLayout(quizPanel, BoxLayout.Y_AXIS);
 
 
 	public StudentMenu() {
-		panel.setLayout(new GridLayout(4,1,2,30));
-		panel.add(pageName);
-		panel.add(selectQuizName);
-		panel.add(comboBox);
-		panel.add(button);
-		
-		frame.add(panel);
-		
-		frame.pack();
-		frame.setSize(500,500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
+
+		startQuiz.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+		quizMenu.setMaximumSize(quizMenu.getPreferredSize());
+		quizMenu.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+		message.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+		quizPanel.add(message);
+		quizPanel.add(Box.createRigidArea(new Dimension(0, 80)));
+		quizPanel.add(quizMenu);
+		quizPanel.add(Box.createRigidArea(new Dimension(0, 80)));
+		quizPanel.add(startQuiz);
+		quizPanel.setLayout(boxlayout); 
+		quizPanel.setBorder(new EmptyBorder(new Insets(150, 200, 150, 200)));
+
+    	quiz.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	quiz.setSize(650, 650);
+    	quiz.setLocation(300, 50);
+    	quiz.add(quizPanel);
+		quiz.setVisible(true);
+
+		// menu.addActionListener(new ActionListener() {
+
+		// 	public void actionPerformed(ActionEvent e) {
+		// 		String x = String.valueOf(menu.getSelectedItem());
+		// 		Qc.selectedTitle(x);
+
+		// 	}
+		// });
+
 	}
+	
 	public static void main(String[] args) {
 		new  StudentMenu();
-	}
+	
+}
 }

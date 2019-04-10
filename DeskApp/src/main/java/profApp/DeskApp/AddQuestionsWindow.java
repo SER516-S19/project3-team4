@@ -6,6 +6,10 @@ import java.awt.GraphicsEnvironment;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -16,26 +20,38 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import profApp.model.Question;
+import profApp.model.Quiz;
+
 public class AddQuestionsWindow extends JFrame {
 
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-
+	private final String FOLDER_PATH = "./quizzes/";
+	
+	private JTextField questionTitle;
+	private JTextField firstOption;
+	private JTextField secondOption;
+	private JTextField thirdOption;
+	private JTextField fourthOption;
+	private JTextField correctOption;
+	
 	/**
 	 * Create the application.
+	 * @param quizName 
 	 */
-	public AddQuestionsWindow() {
+
+	public AddQuestionsWindow(String quizName, ArrayList<Question> questionsList) {
 		setBackground(new Color(248, 248, 255));
-		initialize();
+		initialize(quizName,questionsList);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize( final String quizName,final ArrayList<Question> questionsList) {
+		
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		this.setMaximizedBounds(env.getMaximumWindowBounds());
 		this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
@@ -51,69 +67,73 @@ public class AddQuestionsWindow extends JFrame {
 		lblQuestion.setFont(new java.awt.Font("Arial", Font.BOLD, 16));
 		lblQuestion.setBounds(560, 39, 106, 22);
 		panel.add(lblQuestion);
+		
+		questionTitle = new JTextField();
+		questionTitle.setBorder(new LineBorder(Color.BLACK));
+		questionTitle.setFont(new Font("Arial", Font.PLAIN, 11));
+		questionTitle.setBounds(676, 41, 238, 71);
+		panel.add(questionTitle);
+		questionTitle.setColumns(10);
+		
+		JLabel lblOptionFirst = new JLabel("Option 1");
+		lblOptionFirst.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
+		lblOptionFirst.setBounds(379, 148, 94, 14);
+		panel.add(lblOptionFirst);
 
-		JTextArea textArea = new JTextArea();
-		textArea.setBorder(new LineBorder(Color.BLACK));
-		textArea.setBounds(676, 41, 238, 71);
-		panel.add(textArea);
+		firstOption = new JTextField();
+		firstOption.setBorder(new LineBorder(Color.BLACK));
+		firstOption.setFont(new Font("Arial", Font.PLAIN, 11));
+		firstOption.setBounds(504, 136, 174, 40);
+		panel.add(firstOption);
+		firstOption.setColumns(10);
+		
+		JLabel lblOptionSecond = new JLabel("Option 2");
+		lblOptionSecond.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
+		lblOptionSecond.setBounds(379, 249, 94, 14);
+		panel.add(lblOptionSecond);
 
-		JLabel lblOption = new JLabel("Option 1");
-		lblOption.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
-		lblOption.setBounds(379, 148, 94, 14);
-		panel.add(lblOption);
+		secondOption = new JTextField();
+		secondOption.setBorder(new LineBorder(Color.BLACK));
+		secondOption.setBounds(504, 237, 174, 40);
+		panel.add(secondOption);
+		secondOption.setColumns(10);
+		
+		
+		JLabel lblOptionThird = new JLabel("Option 3");
+		lblOptionThird.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
+		lblOptionThird.setBounds(722, 148, 86, 14);
+		panel.add(lblOptionThird);
 
-		textField = new JTextField();
-		textField.setBorder(new LineBorder(Color.BLACK));
-		textField.setFont(new Font("Arial", Font.PLAIN, 11));
-		textField.setBounds(504, 136, 174, 40);
-		panel.add(textField);
-		textField.setColumns(10);
-
-		JLabel lblOption_1 = new JLabel("Option 2");
-		lblOption_1.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
-		lblOption_1.setBounds(379, 249, 94, 14);
-		panel.add(lblOption_1);
-
-		textField_1 = new JTextField();
-		textField_1.setBorder(new LineBorder(Color.BLACK));
-		textField_1.setBounds(504, 237, 174, 40);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
-
-		JLabel lblOption_2 = new JLabel("Option 3");
-		lblOption_2.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
-		lblOption_2.setBounds(722, 148, 86, 14);
-		panel.add(lblOption_2);
-
-		textField_2 = new JTextField();
-		textField_2.setBorder(new LineBorder(Color.BLACK));
-		textField_2.setBounds(859, 136, 174, 40);
-		panel.add(textField_2);
-		textField_2.setColumns(10);
-
-		textField_3 = new JTextField();
-		textField_3.setBorder(new LineBorder(Color.BLACK));
-		textField_3.setBounds(859, 237, 174, 40);
-		panel.add(textField_3);
-		textField_3.setColumns(10);
-
-		JLabel lblOption_3 = new JLabel("Option 4");
-		lblOption_3.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
-		lblOption_3.setBounds(722, 249, 99, 14);
-		panel.add(lblOption_3);
-
+		thirdOption = new JTextField();
+		thirdOption.setBorder(new LineBorder(Color.BLACK));
+		thirdOption.setBounds(859, 136, 174, 40);
+		panel.add(thirdOption);
+		thirdOption.setColumns(10);
+		
+		JLabel lblOptionFourth = new JLabel("Option 4");
+		lblOptionFourth.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
+		lblOptionFourth.setBounds(722, 249, 99, 14);
+		panel.add(lblOptionFourth);
+		
+		fourthOption = new JTextField();
+		fourthOption.setBorder(new LineBorder(Color.BLACK));
+		fourthOption.setBounds(859, 237, 174, 40);
+		panel.add(fourthOption);
+		fourthOption.setColumns(10);
+	
 		JLabel lblCorrectAnswer = new JLabel("Correct Answer");
 		lblCorrectAnswer.setForeground(Color.BLACK);
 		lblCorrectAnswer.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
 		lblCorrectAnswer.setBounds(504, 324, 152, 14);
 		panel.add(lblCorrectAnswer);
 
-		textField_4 = new JTextField();
-		textField_4.setBorder(new LineBorder(Color.BLACK));
-		textField_4.setBounds(689, 312, 174, 40);
-		panel.add(textField_4);
-		textField_4.setColumns(10);
-
+		correctOption = new JTextField();
+		correctOption.setBorder(new LineBorder(Color.BLACK));
+		correctOption.setBounds(689, 312, 174, 40);
+		panel.add(correctOption);
+		correctOption.setColumns(10);
+		
+		
 		JButton btnAddMoreQuestions = new JButton("Add more questions");
 		btnAddMoreQuestions.setForeground(Color.BLACK);
 		btnAddMoreQuestions.setBorder(new LineBorder(Color.BLACK));
@@ -121,7 +141,15 @@ public class AddQuestionsWindow extends JFrame {
 		btnAddMoreQuestions.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
 		btnAddMoreQuestions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AddQuestionsWindow addQuestions = new AddQuestionsWindow();
+				ArrayList<Question> questions = new ArrayList<>();
+				if(questionsList != null) {
+					for(Question question : questionsList) {
+						questions.add(question);
+					}
+				}
+				
+				questions = populateQuestionList(questions);
+				AddQuestionsWindow addQuestions = new AddQuestionsWindow(quizName, questions);
 				addQuestions.setVisible(true);
 				dispose();
 			}
@@ -136,12 +164,53 @@ public class AddQuestionsWindow extends JFrame {
 		btnSubmit.setForeground(Color.BLACK);
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ArrayList<Question> questions = questionsList;
+				questions = populateQuestionList(questions);
+				createQuiz(quizName,questions);
 				ApplicationWindow appWindow = new ApplicationWindow();
 				appWindow.setVisible(true);
 				dispose();
 			}
+
+
 		});
 		btnSubmit.setBounds(830, 396, 117, 49);
 		panel.add(btnSubmit);
+	}
+	
+	private void createQuiz(String quizName, ArrayList<Question> questionsList) {
+		// TODO Auto-generated method stub
+		String filename = FOLDER_PATH + quizName + ".json";
+		Quiz quiz = new Quiz(questionsList);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json = gson.toJson(quiz);
+		System.out.println(json);
+		try {
+			File file = new File(filename);
+			FileWriter writer = new FileWriter(file);
+			writer.write(json);
+			writer.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private ArrayList<Question> populateQuestionList(ArrayList<Question> questionsList) {
+		Question question = new Question();
+		 question.setTitle(questionTitle.getText());
+		 question.setOptions(firstOption.getText());
+		 question.setOptions(secondOption.getText());
+		 question.setOptions(thirdOption.getText());
+		 question.setOptions(fourthOption.getText());
+		 question.setCorrectAnswer(correctOption.getText());
+		if(questionsList !=  null && questionsList.size() > 0) {
+			questionsList.add(question);
+		}else {
+			questionsList = new ArrayList<>();
+			questionsList.add(question);
+		}
+		
+		return questionsList;
 	}
 }

@@ -20,7 +20,7 @@ import javax.swing.border.LineBorder;
 
 public class CreateQuizWindow extends JFrame {
 
-	private final String FOLDER_PATH = "./quizzes/";
+	
 	private JFrame frame;
 	private JTextField textField;
 
@@ -54,8 +54,7 @@ public class CreateQuizWindow extends JFrame {
 		btnSubmit.setFont(new Font("Arial", Font.BOLD, 14));
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				createQuizeFile();
-				AddQuestionsWindow addQuestions = new AddQuestionsWindow();
+				AddQuestionsWindow addQuestions = new AddQuestionsWindow(textField.getText(),null);
 				addQuestions.setVisible(true);
 				dispose();
 			}
@@ -68,16 +67,5 @@ public class CreateQuizWindow extends JFrame {
 		lblCreateQuiz.setFont(new Font("Arial", Font.BOLD, 28));
 		lblCreateQuiz.setBounds(604, 60, 243, 61);
 		panel.add(lblCreateQuiz);
-	}
-
-	private void createQuizeFile() {
-		String filename = FOLDER_PATH + textField.getText() + ".json";
-		try {
-			File file = new File(filename);
-			FileWriter writer = new FileWriter(file);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 }

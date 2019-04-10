@@ -16,7 +16,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
@@ -26,32 +25,31 @@ import com.google.gson.GsonBuilder;
 import profApp.model.Question;
 import profApp.model.Quiz;
 
+/**
+ * AddQuestionsWindow class: This class displays option to add question, options
+ * and correct answer and saves the quiz.
+ *
+ * @author akashkadam, truptikhatavkar
+ * @version 1.3
+ */
 public class AddQuestionsWindow extends JFrame {
 
 	private final String FOLDER_PATH = "./quizzes/";
-	
+
 	private JTextField questionTitle;
 	private JTextField firstOption;
 	private JTextField secondOption;
 	private JTextField thirdOption;
 	private JTextField fourthOption;
 	private JTextField correctOption;
-	
-	/**
-	 * Create the application.
-	 * @param quizName 
-	 */
 
 	public AddQuestionsWindow(String quizName, ArrayList<Question> questionsList) {
 		setBackground(new Color(248, 248, 255));
-		initialize(quizName,questionsList);
+		initialize(quizName, questionsList);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize( final String quizName,final ArrayList<Question> questionsList) {
-		
+	private void initialize(final String quizName, final ArrayList<Question> questionsList) {
+
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		this.setMaximizedBounds(env.getMaximumWindowBounds());
 		this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
@@ -63,22 +61,22 @@ public class AddQuestionsWindow extends JFrame {
 		getContentPane().add(panel);
 		panel.setLayout(null);
 
-		JLabel lblQuestion = new JLabel("Question");
-		lblQuestion.setFont(new java.awt.Font("Arial", Font.BOLD, 16));
-		lblQuestion.setBounds(560, 39, 106, 22);
-		panel.add(lblQuestion);
-		
+		JLabel question = new JLabel("Question");
+		question.setFont(new java.awt.Font("Arial", Font.BOLD, 16));
+		question.setBounds(560, 39, 106, 22);
+		panel.add(question);
+
 		questionTitle = new JTextField();
 		questionTitle.setBorder(new LineBorder(Color.BLACK));
 		questionTitle.setFont(new Font("Arial", Font.PLAIN, 11));
 		questionTitle.setBounds(676, 41, 238, 71);
 		panel.add(questionTitle);
 		questionTitle.setColumns(10);
-		
-		JLabel lblOptionFirst = new JLabel("Option 1");
-		lblOptionFirst.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
-		lblOptionFirst.setBounds(379, 148, 94, 14);
-		panel.add(lblOptionFirst);
+
+		JLabel OptionFirst = new JLabel("Option 1");
+		OptionFirst.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
+		OptionFirst.setBounds(379, 148, 94, 14);
+		panel.add(OptionFirst);
 
 		firstOption = new JTextField();
 		firstOption.setBorder(new LineBorder(Color.BLACK));
@@ -86,105 +84,102 @@ public class AddQuestionsWindow extends JFrame {
 		firstOption.setBounds(504, 136, 174, 40);
 		panel.add(firstOption);
 		firstOption.setColumns(10);
-		
-		JLabel lblOptionSecond = new JLabel("Option 2");
-		lblOptionSecond.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
-		lblOptionSecond.setBounds(379, 249, 94, 14);
-		panel.add(lblOptionSecond);
+
+		JLabel OptionSecond = new JLabel("Option 2");
+		OptionSecond.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
+		OptionSecond.setBounds(379, 249, 94, 14);
+		panel.add(OptionSecond);
 
 		secondOption = new JTextField();
 		secondOption.setBorder(new LineBorder(Color.BLACK));
 		secondOption.setBounds(504, 237, 174, 40);
 		panel.add(secondOption);
 		secondOption.setColumns(10);
-		
-		
-		JLabel lblOptionThird = new JLabel("Option 3");
-		lblOptionThird.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
-		lblOptionThird.setBounds(722, 148, 86, 14);
-		panel.add(lblOptionThird);
+
+		JLabel OptionThird = new JLabel("Option 3");
+		OptionThird.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
+		OptionThird.setBounds(722, 148, 86, 14);
+		panel.add(OptionThird);
 
 		thirdOption = new JTextField();
 		thirdOption.setBorder(new LineBorder(Color.BLACK));
 		thirdOption.setBounds(859, 136, 174, 40);
 		panel.add(thirdOption);
 		thirdOption.setColumns(10);
-		
-		JLabel lblOptionFourth = new JLabel("Option 4");
-		lblOptionFourth.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
-		lblOptionFourth.setBounds(722, 249, 99, 14);
-		panel.add(lblOptionFourth);
-		
+
+		JLabel OptionFourth = new JLabel("Option 4");
+		OptionFourth.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
+		OptionFourth.setBounds(722, 249, 99, 14);
+		panel.add(OptionFourth);
+
 		fourthOption = new JTextField();
 		fourthOption.setBorder(new LineBorder(Color.BLACK));
 		fourthOption.setBounds(859, 237, 174, 40);
 		panel.add(fourthOption);
 		fourthOption.setColumns(10);
-	
-		JLabel lblCorrectAnswer = new JLabel("Correct Answer");
-		lblCorrectAnswer.setForeground(Color.BLACK);
-		lblCorrectAnswer.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
-		lblCorrectAnswer.setBounds(504, 324, 152, 14);
-		panel.add(lblCorrectAnswer);
+
+		JLabel CorrectAnswer = new JLabel("Correct Answer");
+		CorrectAnswer.setForeground(Color.BLACK);
+		CorrectAnswer.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
+		CorrectAnswer.setBounds(504, 324, 152, 14);
+		panel.add(CorrectAnswer);
 
 		correctOption = new JTextField();
 		correctOption.setBorder(new LineBorder(Color.BLACK));
 		correctOption.setBounds(689, 312, 174, 40);
 		panel.add(correctOption);
 		correctOption.setColumns(10);
-		
-		
-		JButton btnAddMoreQuestions = new JButton("Add more questions");
-		btnAddMoreQuestions.setForeground(Color.BLACK);
-		btnAddMoreQuestions.setBorder(new LineBorder(Color.BLACK));
-		btnAddMoreQuestions.setBackground(SystemColor.scrollbar);
-		btnAddMoreQuestions.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
-		btnAddMoreQuestions.addActionListener(new ActionListener() {
+
+		JButton AddMoreQuestions = new JButton("Add more questions");
+		AddMoreQuestions.setForeground(Color.BLACK);
+		AddMoreQuestions.setBorder(new LineBorder(Color.BLACK));
+		AddMoreQuestions.setBackground(SystemColor.scrollbar);
+		AddMoreQuestions.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
+		AddMoreQuestions.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<Question> questions = new ArrayList<>();
-				if(questionsList != null) {
-					for(Question question : questionsList) {
+				if (questionsList != null) {
+					for (Question question : questionsList) {
 						questions.add(question);
 					}
 				}
-				
+
 				questions = populateQuestionList(questions);
 				AddQuestionsWindow addQuestions = new AddQuestionsWindow(quizName, questions);
 				addQuestions.setVisible(true);
 				dispose();
 			}
 		});
-		btnAddMoreQuestions.setBounds(454, 396, 224, 49);
-		panel.add(btnAddMoreQuestions);
+		AddMoreQuestions.setBounds(454, 396, 224, 49);
+		panel.add(AddMoreQuestions);
 
-		JButton btnSubmit = new JButton("Submit");
-		btnSubmit.setBorder(new LineBorder(Color.BLACK));
-		btnSubmit.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
-		btnSubmit.setBackground(SystemColor.scrollbar);
-		btnSubmit.setForeground(Color.BLACK);
-		btnSubmit.addActionListener(new ActionListener() {
+		JButton Submit = new JButton("Submit");
+		Submit.setBorder(new LineBorder(Color.BLACK));
+		Submit.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
+		Submit.setBackground(SystemColor.scrollbar);
+		Submit.setForeground(Color.BLACK);
+		Submit.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<Question> questions = questionsList;
 				questions = populateQuestionList(questions);
-				createQuiz(quizName,questions);
+				createQuiz(quizName, questions);
 				ApplicationWindow appWindow = new ApplicationWindow();
 				appWindow.setVisible(true);
 				dispose();
 			}
 
-
 		});
-		btnSubmit.setBounds(830, 396, 117, 49);
-		panel.add(btnSubmit);
+		Submit.setBounds(830, 396, 117, 49);
+		panel.add(Submit);
 	}
-	
+
 	private void createQuiz(String quizName, ArrayList<Question> questionsList) {
-		// TODO Auto-generated method stub
 		String filename = FOLDER_PATH + quizName + ".json";
 		Quiz quiz = new Quiz(questionsList);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(quiz);
-		System.out.println(json);
 		try {
 			File file = new File(filename);
 			FileWriter writer = new FileWriter(file);
@@ -195,22 +190,22 @@ public class AddQuestionsWindow extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private ArrayList<Question> populateQuestionList(ArrayList<Question> questionsList) {
 		Question question = new Question();
-		 question.setTitle(questionTitle.getText());
-		 question.setOptions(firstOption.getText());
-		 question.setOptions(secondOption.getText());
-		 question.setOptions(thirdOption.getText());
-		 question.setOptions(fourthOption.getText());
-		 question.setCorrectAnswer(correctOption.getText());
-		if(questionsList !=  null && questionsList.size() > 0) {
+		question.setTitle(questionTitle.getText());
+		question.setOptions(firstOption.getText());
+		question.setOptions(secondOption.getText());
+		question.setOptions(thirdOption.getText());
+		question.setOptions(fourthOption.getText());
+		question.setCorrectAnswer(correctOption.getText());
+		if (questionsList != null && questionsList.size() > 0) {
 			questionsList.add(question);
-		}else {
+		} else {
 			questionsList = new ArrayList<>();
 			questionsList.add(question);
 		}
-		
+
 		return questionsList;
 	}
 }

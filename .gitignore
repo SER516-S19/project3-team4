@@ -15,7 +15,16 @@
 *.dmg
 *.gz
 *.iso
-*.jar
 *.rar
 *.tar
 *.zip
+
+# IntelliJ Idea files #
+############
+*.iml
+.idea/
+out/
+
+# temporary vim file #
+############
+*.swp

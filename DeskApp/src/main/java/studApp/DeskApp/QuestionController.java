@@ -17,11 +17,14 @@ public class QuestionController {
 	int currentQuestion;
 	int quizLength;
 	
-	QuestionController(QuizDAO quiz) {
-		this.quiz = quiz;
+	QuestionController() {
+		currentQuestion = 0;
+	}
+	
+	public void setQuiz(QuizDAO quizDAO) {
+		this.quiz = quizDAO;
 		quizLength = quiz.getQuestionList().size();
 		correctAnswers = new boolean[quizLength];
-		currentQuestion = 0;
 	}
 	
 	/**

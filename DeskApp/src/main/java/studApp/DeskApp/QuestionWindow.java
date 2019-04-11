@@ -43,10 +43,22 @@ public class QuestionWindow {
 	 */
 	public QuestionWindow(QuestionController questionController) {
 		this.questionController = questionController;
-		initialize();
+		createFrame();
+	}
+	
+	/**
+	 * Renders the frame with the first question
+	 */
+	public void render() {
 		Question question = this.questionController.getCurrentQuestion();
 		update(question.getTitle(),question.getOptions());
 		setVisible(true);
+	}
+	/**
+	 * @return the questionController for this panel
+	 */
+	public QuestionController getController() {
+		return questionController;
 	}
 	
 	/**
@@ -79,7 +91,7 @@ public class QuestionWindow {
 	 * Initializes the JFrame with all the necessary components.
 	 * No text is populated initially and must be done with an update.
 	 */
-	private void initialize() {
+	private void createFrame() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -14,6 +14,7 @@ import java.util.List;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -65,6 +66,7 @@ public class QuestionWindow {
 		txtrQuestion.setText(question);
 		int i = 0;
 		Enumeration<AbstractButton> buttons = answerButtons.getElements();
+		answerButtons.clearSelection();
 		while(buttons.hasMoreElements()) {
 			AbstractButton button = buttons.nextElement();
         	button.setText(answers.get(i));
@@ -145,12 +147,17 @@ public class QuestionWindow {
 		nextButton.setMaximumSize(new Dimension(100, 29));
 		nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String answer = answerButtons.getSelection().getActionCommand();
-				Question question = questionController.submitAnswer(answer);
-				if(question != null){
-					update(question.getTitle(), question.getOptions());
+				ButtonModel answer = answerButtons.getSelection();
+				if(answer != null) {
+					Question question = questionController.submitAnswer(
+							answer.getActionCommand());
+					if(question != null){
+						update(question.getTitle(), question.getOptions());
+					} else {
+						//TODO: End screen
+					}
 				} else {
-					//TODO: End screen
+					skipButton.doClick();
 				}
 			}
 		});

@@ -10,6 +10,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
@@ -21,6 +22,8 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import studApp.DeskApp.dao.Question;
 
 /**
  * Application window for asking a question. This version is just a 
@@ -34,51 +37,33 @@ public class QuestionWindow {
 	private JFrame frame;
 	private ButtonGroup answerButtons = new ButtonGroup();
 	private JTextArea txtrQuestion = new JTextArea();
-
-
-	/**
-	 * Launch the application. TODO: This is for testing and will need to be deleted in the final version
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					QuestionWindow window = new QuestionWindow();
-					String question = "Here is a question. The question may be super long or not. "
-							+ "Who cares? I sure don't!";
-					String[] answers = {
-							"Here is an answer", 
-							"Here is another answer", 
-							"Here is yet another answer", 
-							"Here is the final answer"
-							};
-					window.update(question, answers);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private QuestionController questionController;
 
 	/**
 	 * Create the application.
 	 */
-	public QuestionWindow() {
+	public QuestionWindow(QuestionController questionController) {
+		this.questionController = questionController;
 		initialize();
+		Question question = this.questionController.getNextQuestion();
+		update(question.getTitle(),question.getOptions());
+		setVisible(true);
 	}
 	
+	public void setVisible(boolean isVisible) {
+		frame.setVisible(isVisible);
+	}
 	/**
 	 * Updates the frame to include new question and answer information. 
 	 * @param question String of a question
 	 * @param answers Array of strings of answers
 	 */
-	public void update(String question, String[]answers) {
+	public void update(String question, List<String>answers) {
 		txtrQuestion.setText(question);
 		int i = 0;
 		Enumeration<AbstractButton> buttons = answerButtons.getElements();
 		while(buttons.hasMoreElements()) {
-        	buttons.nextElement().setText(answers[i]);
+        	buttons.nextElement().setText(answers.get(i));
         	i++;
 		}
 	}
@@ -140,7 +125,8 @@ public class QuestionWindow {
 		skipButton.setPreferredSize(new Dimension(100, 29));
 		skipButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: Create controller with skip method to skip a question and leave it unanswered. 
+				Question question = questionController.getNextQuestion();
+				update(question.getTitle(), question.getOptions());
 			}
 		});
 		

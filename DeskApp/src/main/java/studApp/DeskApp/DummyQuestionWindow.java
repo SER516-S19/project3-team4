@@ -1,3 +1,5 @@
+package studApp.DeskApp;
+
 import javax.swing.*;
 
 public class DummyQuestionWindow {

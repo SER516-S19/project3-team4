@@ -4,12 +4,11 @@ package studApp.DeskApp;
 
 import java.awt.EventQueue;
 import java.util.List;
-
 import studApp.DeskApp.dao.QuizDAO;
 import studApp.DeskApp.operations.JSONParser;
 
 /**
- * @author amankaushik 
+ * @author amankaushik
  * @author paulhorton
  */
 public class StudentMain {

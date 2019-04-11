@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,7 +17,10 @@ import studApp.DeskApp.dao.QuizDAO;
 /**
  * @author amankaushik
  */
+
+/* Assumes all files end with an extension */
 public class JSONParser {
+
   private static final String JSONEXTENSION = ".json";
 
   private static String getString(Path path) {
@@ -31,7 +33,7 @@ public class JSONParser {
     try (Stream<Path> walk = Files.walk(Paths.get(dirPath))) {
       result =
           walk.map(JSONParser::getString)
-              .filter(f -> f.endsWith(JSONParser.JSONEXTENSION))
+              .filter(f -> f.toLowerCase().endsWith(JSONParser.JSONEXTENSION))
               .collect(Collectors.toList());
     } catch (IOException e) {
       e.printStackTrace();
@@ -42,16 +44,21 @@ public class JSONParser {
     return quizDAOList;
   }
 
-  public static QuizDAO parseFile(String filename, String quizName) {
+  private static QuizDAO parseFile(String filename, String quizName) {
     GsonBuilder gsonBuilder =
         new GsonBuilder().registerTypeAdapter(Question.class, new QuizQuestionTypeAdapter());
     QuizDAO quizDAO = null;
     try {
       FileReader reader = new FileReader(filename);
       quizDAO = gsonBuilder.create().fromJson(reader, QuizDAO.class);
-      /* If no explicit name for a quiz is passed, take the filename as quiz name*/
+      /* If no explicit name for a quiz is passed, get the quiz name from the filename */
       if (quizName == null) {
-        quizName = new ArrayList<>(Arrays.asList(filename.split(JSONParser.JSONEXTENSION))).get(0);
+        Path _quizPath = Paths.get(filename);
+        quizName = _quizPath.getFileName().toString();
+        /* redundant check, already enforced in parseDirectory method */
+        if (quizName.toLowerCase().endsWith(JSONParser.JSONEXTENSION)) {
+          quizName = quizName.substring(0, quizName.length() - JSONParser.JSONEXTENSION.length());
+        }
       }
       quizDAO.setQuizName(quizName);
     } catch (FileNotFoundException e) {

@@ -19,8 +19,8 @@ public class StudentMain {
 				try {
 					QuizListController quizListController = new QuizListController();
 					QuestionController  questionController = new QuestionController();
-					QuestionWindow questionWindow = new QuestionWindow(questionController);
-					new QuizListFrame(quizListController, questionWindow);
+					QuestionFrame questionFrame = new QuestionFrame(questionController, new EndFrame());
+					new QuizListFrame(quizListController, questionFrame);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

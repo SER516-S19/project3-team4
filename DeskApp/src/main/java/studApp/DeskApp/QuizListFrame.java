@@ -18,9 +18,9 @@ public class QuizListFrame extends JFrame {
 	private List<QuizDAO> qs = null;
 	private JPanel panel = null;
 	private QuizListController quizController;
-	private QuestionWindow nextWindow;
+	private QuestionFrame nextWindow;
 	
-	public QuizListFrame(QuizListController quizController, QuestionWindow nextWindow)  {
+	public QuizListFrame(QuizListController quizController, QuestionFrame nextWindow)  {
 		this.quizController = quizController;
 		this.nextWindow = nextWindow;
 		initialize(quizController.getQuizList());	

@@ -31,17 +31,19 @@ import studApp.DeskApp.dao.Question;
  * @author paulhorton
  * @version 1.2
  */
-public class QuestionWindow {
+public class QuestionFrame {
 
 	private JFrame frame;
 	private ButtonGroup answerButtons = new ButtonGroup();
 	private JTextArea txtrQuestion = new JTextArea();
 	private QuestionController questionController;
+	private EndFrame nextFrame;
 
 	/**
 	 * Create the application.
 	 */
-	public QuestionWindow(QuestionController questionController) {
+	public QuestionFrame(QuestionController questionController, EndFrame nextFrame) {
+		this.nextFrame = nextFrame;
 		this.questionController = questionController;
 		createFrame();
 	}
@@ -148,7 +150,8 @@ public class QuestionWindow {
 				if(question != null){
 					update(question.getTitle(), question.getOptions());
 				} else {
-					//TODO: End screen
+					setVisible(false);
+					nextFrame.setVisible(true);
 				}
 			}
 		});
@@ -166,7 +169,8 @@ public class QuestionWindow {
 					if(question != null){
 						update(question.getTitle(), question.getOptions());
 					} else {
-						//TODO: End screen
+						setVisible(false);
+						nextFrame.setVisible(true);
 					}
 				} else {
 					skipButton.doClick();

@@ -31,22 +31,36 @@ import studApp.DeskApp.dao.Question;
  * @author paulhorton
  * @version 1.2
  */
-public class QuestionWindow {
+public class QuestionFrame {
 
 	private JFrame frame;
 	private ButtonGroup answerButtons = new ButtonGroup();
 	private JTextArea txtrQuestion = new JTextArea();
 	private QuestionController questionController;
+	private EndFrame nextFrame;
 
 	/**
 	 * Create the application.
 	 */
-	public QuestionWindow(QuestionController questionController) {
+	public QuestionFrame(QuestionController questionController, EndFrame nextFrame) {
+		this.nextFrame = nextFrame;
 		this.questionController = questionController;
-		initialize();
+		createFrame();
+	}
+	
+	/**
+	 * Renders the frame with the first question
+	 */
+	public void render() {
 		Question question = this.questionController.getCurrentQuestion();
 		update(question.getTitle(),question.getOptions());
 		setVisible(true);
+	}
+	/**
+	 * @return the questionController for this panel
+	 */
+	public QuestionController getController() {
+		return questionController;
 	}
 	
 	/**
@@ -79,7 +93,7 @@ public class QuestionWindow {
 	 * Initializes the JFrame with all the necessary components.
 	 * No text is populated initially and must be done with an update.
 	 */
-	private void initialize() {
+	private void createFrame() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -136,7 +150,8 @@ public class QuestionWindow {
 				if(question != null){
 					update(question.getTitle(), question.getOptions());
 				} else {
-					//TODO: End screen
+					setVisible(false);
+					nextFrame.setVisible(true);
 				}
 			}
 		});
@@ -154,7 +169,8 @@ public class QuestionWindow {
 					if(question != null){
 						update(question.getTitle(), question.getOptions());
 					} else {
-						//TODO: End screen
+						setVisible(false);
+						nextFrame.setVisible(true);
 					}
 				} else {
 					skipButton.doClick();

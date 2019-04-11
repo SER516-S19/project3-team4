@@ -17,10 +17,13 @@ import studApp.DeskApp.dao.QuizDAO;
 public class QuizListFrame extends JFrame {
 	private List<QuizDAO> qs = null;
 	private JPanel panel = null;
-	private List<DummyQuestionWindow> qws = null;
+	private QuizListController quizController;
+	private QuestionFrame nextWindow;
 	
-	public QuizListFrame(List<QuizDAO> quizzes, List<DummyQuestionWindow> questionWindows)  {
-		initialize(quizzes, questionWindows);	
+	public QuizListFrame(QuizListController quizController, QuestionFrame nextWindow)  {
+		this.quizController = quizController;
+		this.nextWindow = nextWindow;
+		initialize(quizController.getQuizList());	
 		stylize();
 		assemble();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
@@ -30,10 +33,9 @@ public class QuizListFrame extends JFrame {
 	/**
 	 * initialize the quiz list panel, get the quiz list data and question window list
 	 */
-	private void initialize(List<QuizDAO> quizzes, List<DummyQuestionWindow> questionWindows) {
+	private void initialize(List<QuizDAO> quizzes) {
 		panel = new JPanel();
 		qs = quizzes;
-		qws = questionWindows;	
 	}
 	
 	/**
@@ -51,7 +53,6 @@ public class QuizListFrame extends JFrame {
 	private void assemble() {
 		add(panel);
         for(int i=0;i<qs.size();i++) {
-        	System.out.println("add button" + qs.get(i).getQuizName());
         	JButton jb = new JButton(qs.get(i).getQuizName().substring(qs.get(i).getQuizName().lastIndexOf('\\')+1));
         	jb.setAlignmentX(CENTER_ALIGNMENT);
         	jb.setAlignmentY(CENTER_ALIGNMENT);
@@ -59,9 +60,11 @@ public class QuizListFrame extends JFrame {
         	panel.add(jb);        	
         	int index= i;
         	jb.addActionListener(e->{
-        		qws.get(index).show();
+        		QuizDAO quiz = quizController.getQuizList().get(index);
+        		nextWindow.getController().setQuiz(quiz);
+        		setVisible(false);
+        		nextWindow.render();
         	});
-        	
         }
 	}
 

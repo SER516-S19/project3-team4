@@ -12,23 +12,20 @@ import studApp.DeskApp.operations.JSONParser;
  * @author amankaushik 
  * @author paulhorton
  */
-public class mainTester {
+public class StudentMain {
 
     public static void main(String[] args) {
-        QuizDAO quizDAO = JSONParser.parseFile("src/main/java/studApp/DeskApp/check.json", null);
-        System.out.println(quizDAO.getQuizName());
-        System.out.println(quizDAO.getQuestionList());
-        
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					QuestionController qc = new QuestionController(quizDAO);
-					QuestionWindow window = new QuestionWindow(qc);
+					QuizListController quizListController = new QuizListController();
+					QuestionController  questionController = new QuestionController();
+					QuestionWindow questionWindow = new QuestionWindow(questionController);
+					new QuizListFrame(quizListController, questionWindow);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-		});
-    }
-    
+		});	
+    }    
 }

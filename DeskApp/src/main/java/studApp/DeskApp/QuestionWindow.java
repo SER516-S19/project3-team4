@@ -10,9 +10,11 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
@@ -22,50 +24,37 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import studApp.DeskApp.dao.Question;
+
 /**
- * Application window for asking a question. This version is just a 
- * skeleton for the UI. It will need to be updated to take in a quiz
- * question and re-render the components. 
+ * Application window for asking a question.
  * @author paulhorton
- * @version 1.1
+ * @version 1.2
  */
 public class QuestionWindow {
 
 	private JFrame frame;
 	private ButtonGroup answerButtons = new ButtonGroup();
 	private JTextArea txtrQuestion = new JTextArea();
-
-
-	/**
-	 * Launch the application. TODO: This is for testing and will need to be deleted in the final version
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					QuestionWindow window = new QuestionWindow();
-					String question = "Here is a question. The question may be super long or not. "
-							+ "Who cares? I sure don't!";
-					String[] answers = {
-							"Here is an answer", 
-							"Here is another answer", 
-							"Here is yet another answer", 
-							"Here is the final answer"
-							};
-					window.update(question, answers);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private QuestionController questionController;
 
 	/**
 	 * Create the application.
 	 */
-	public QuestionWindow() {
+	public QuestionWindow(QuestionController questionController) {
+		this.questionController = questionController;
 		initialize();
+		Question question = this.questionController.getCurrentQuestion();
+		update(question.getTitle(),question.getOptions());
+		setVisible(true);
+	}
+	
+	/**
+	 * Sets the visibility of the frame.
+	 * @param isVisible
+	 */
+	public void setVisible(boolean isVisible) {
+		frame.setVisible(isVisible);
 	}
 	
 	/**
@@ -73,12 +62,15 @@ public class QuestionWindow {
 	 * @param question String of a question
 	 * @param answers Array of strings of answers
 	 */
-	public void update(String question, String[]answers) {
+	public void update(String question, List<String>answers) {
 		txtrQuestion.setText(question);
 		int i = 0;
 		Enumeration<AbstractButton> buttons = answerButtons.getElements();
+		answerButtons.clearSelection();
 		while(buttons.hasMoreElements()) {
-        	buttons.nextElement().setText(answers[i]);
+			AbstractButton button = buttons.nextElement();
+        	button.setText(answers.get(i));
+        	button.setActionCommand(answers.get(i));
         	i++;
 		}
 	}
@@ -129,7 +121,7 @@ public class QuestionWindow {
 		giveUpButton.setPreferredSize(new Dimension(100, 29));
 		giveUpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: Create controller with give up method to close window. 
+				System.exit(0);
 			}
 		});
 		
@@ -140,7 +132,12 @@ public class QuestionWindow {
 		skipButton.setPreferredSize(new Dimension(100, 29));
 		skipButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: Create controller with skip method to skip a question and leave it unanswered. 
+				Question question = questionController.getNextQuestion();
+				if(question != null){
+					update(question.getTitle(), question.getOptions());
+				} else {
+					//TODO: End screen
+				}
 			}
 		});
 		
@@ -150,7 +147,18 @@ public class QuestionWindow {
 		nextButton.setMaximumSize(new Dimension(100, 29));
 		nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: Create controller with next method to update to next question and check if current question is correct;
+				ButtonModel answer = answerButtons.getSelection();
+				if(answer != null) {
+					Question question = questionController.submitAnswer(
+							answer.getActionCommand());
+					if(question != null){
+						update(question.getTitle(), question.getOptions());
+					} else {
+						//TODO: End screen
+					}
+				} else {
+					skipButton.doClick();
+				}
 			}
 		});
 		GroupLayout gl_buttonPanel = new GroupLayout(buttonPanel);

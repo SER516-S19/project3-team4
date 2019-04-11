@@ -1,4 +1,4 @@
-package studApp.DeskApp;
+package studApp.DeskApp.views;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -8,12 +8,12 @@ import javax.swing.JFrame;
  * @author Hongfei Ju
  * @version 1.0
  */
-public class QuizDirChooser {
+public class QuizDirFrame {
 	private JFileChooser chooser = null;
 	private String path = null;
 	private JFrame frame = null;
 	
-	public QuizDirChooser() {
+	public QuizDirFrame() {
 		frame = new JFrame();
 		chooser = new JFileChooser(); 
 	    chooser.setCurrentDirectory(new java.io.File("."));

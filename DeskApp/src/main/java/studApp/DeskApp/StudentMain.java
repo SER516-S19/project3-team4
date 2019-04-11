@@ -4,8 +4,14 @@ package studApp.DeskApp;
 
 import java.awt.EventQueue;
 import java.util.List;
-import studApp.DeskApp.dao.QuizDAO;
-import studApp.DeskApp.operations.JSONParser;
+
+import studApp.DeskApp.controllers.QuestionController;
+import studApp.DeskApp.controllers.QuizListController;
+import studApp.DeskApp.models.QuizDAO;
+import studApp.DeskApp.utils.JSONParser;
+import studApp.DeskApp.views.EndFrame;
+import studApp.DeskApp.views.QuestionFrame;
+import studApp.DeskApp.views.QuizListFrame;
 
 /**
  * @author amankaushik

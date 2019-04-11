@@ -1,4 +1,4 @@
-package studApp.DeskApp;
+package studApp.DeskApp.views;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import studApp.DeskApp.dao.Question;
+import studApp.DeskApp.models.Question;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;

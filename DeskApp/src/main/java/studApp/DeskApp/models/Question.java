@@ -1,4 +1,4 @@
-package studApp.DeskApp.dao;
+package studApp.DeskApp.models;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package studApp.DeskApp;
+package studApp.DeskApp.views;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -24,7 +24,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
-import studApp.DeskApp.dao.Question;
+import studApp.DeskApp.controllers.QuestionController;
+import studApp.DeskApp.models.Question;
 
 /**
  * Application window for asking a question.

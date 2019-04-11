@@ -1,11 +1,12 @@
-package studApp.DeskApp;
+package studApp.DeskApp.controllers;
 
 import java.awt.EventQueue;
 import java.util.LinkedList;
 import java.util.List;
 
-import studApp.DeskApp.dao.QuizDAO;
-import studApp.DeskApp.operations.JSONParser;
+import studApp.DeskApp.models.QuizDAO;
+import studApp.DeskApp.utils.JSONParser;
+import studApp.DeskApp.views.QuizDirFrame;
 
 /**
  * A basic controller that will initialize the quiz data and all UI components
@@ -13,11 +14,11 @@ import studApp.DeskApp.operations.JSONParser;
  * @version 1.0
  */
 public class QuizListController {	
-	private QuizDirChooser qdChooser = null;
+	private QuizDirFrame qdChooser = null;
 	private static List<QuizDAO> quizzes = null;
 	
 	public QuizListController() {
-		qdChooser = new QuizDirChooser();
+		qdChooser = new QuizDirFrame();
 		quizzes = getQuizzes(qdChooser.getPath());
 	}
 	

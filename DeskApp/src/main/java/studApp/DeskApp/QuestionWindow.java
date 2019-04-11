@@ -26,11 +26,9 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import studApp.DeskApp.dao.Question;
 
 /**
- * Application window for asking a question. This version is just a 
- * skeleton for the UI. It will need to be updated to take in a quiz
- * question and re-render the components. 
+ * Application window for asking a question.
  * @author paulhorton
- * @version 1.1
+ * @version 1.2
  */
 public class QuestionWindow {
 
@@ -45,14 +43,19 @@ public class QuestionWindow {
 	public QuestionWindow(QuestionController questionController) {
 		this.questionController = questionController;
 		initialize();
-		Question question = this.questionController.getNextQuestion();
+		Question question = this.questionController.getCurrentQuestion();
 		update(question.getTitle(),question.getOptions());
 		setVisible(true);
 	}
 	
+	/**
+	 * Sets the visibility of the frame.
+	 * @param isVisible
+	 */
 	public void setVisible(boolean isVisible) {
 		frame.setVisible(isVisible);
 	}
+	
 	/**
 	 * Updates the frame to include new question and answer information. 
 	 * @param question String of a question
@@ -63,7 +66,9 @@ public class QuestionWindow {
 		int i = 0;
 		Enumeration<AbstractButton> buttons = answerButtons.getElements();
 		while(buttons.hasMoreElements()) {
-        	buttons.nextElement().setText(answers.get(i));
+			AbstractButton button = buttons.nextElement();
+        	button.setText(answers.get(i));
+        	button.setActionCommand(answers.get(i));
         	i++;
 		}
 	}
@@ -114,7 +119,7 @@ public class QuestionWindow {
 		giveUpButton.setPreferredSize(new Dimension(100, 29));
 		giveUpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: Create controller with give up method to close window. 
+				System.exit(0);
 			}
 		});
 		
@@ -126,7 +131,11 @@ public class QuestionWindow {
 		skipButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Question question = questionController.getNextQuestion();
-				update(question.getTitle(), question.getOptions());
+				if(question != null){
+					update(question.getTitle(), question.getOptions());
+				} else {
+					//TODO: End screen
+				}
 			}
 		});
 		
@@ -136,7 +145,13 @@ public class QuestionWindow {
 		nextButton.setMaximumSize(new Dimension(100, 29));
 		nextButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO: Create controller with next method to update to next question and check if current question is correct;
+				String answer = answerButtons.getSelection().getActionCommand();
+				Question question = questionController.submitAnswer(answer);
+				if(question != null){
+					update(question.getTitle(), question.getOptions());
+				} else {
+					//TODO: End screen
+				}
 			}
 		});
 		GroupLayout gl_buttonPanel = new GroupLayout(buttonPanel);

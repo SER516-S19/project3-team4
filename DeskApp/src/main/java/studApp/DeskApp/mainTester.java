@@ -9,7 +9,8 @@ import studApp.DeskApp.dao.QuizDAO;
 import studApp.DeskApp.operations.JSONParser;
 
 /**
- * @author amankaushik
+ * @author amankaushik 
+ * @author paulhorton
  */
 public class mainTester {
 

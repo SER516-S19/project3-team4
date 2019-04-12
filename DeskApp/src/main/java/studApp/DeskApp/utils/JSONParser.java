@@ -17,10 +17,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
+ * Assumes all files end with an extension
+
  * @author amankaushik
  */
 
-/* Assumes all files end with an extension */
 public class JSONParser {
 
   private static final String JSONEXTENSION = ".json";
@@ -53,11 +54,11 @@ public class JSONParser {
     try {
       FileReader reader = new FileReader(filename);
       quizDAO = gsonBuilder.create().fromJson(reader, QuizDAO.class);
-      /* If no explicit name for a quiz is passed, get the quiz name from the filename */
+      // If no explicit name for a quiz is passed, get the quiz name from the filename
       if (quizName == null) {
         Path _quizPath = Paths.get(filename);
         quizName = _quizPath.getFileName().toString();
-        /* redundant check, already enforced in parseDirectory method */
+        // redundant check, already enforced in parseDirectory method
         if (quizName.toLowerCase().endsWith(JSONParser.JSONEXTENSION)) {
           quizName = quizName.substring(0, quizName.length() - JSONParser.JSONEXTENSION.length());
         }

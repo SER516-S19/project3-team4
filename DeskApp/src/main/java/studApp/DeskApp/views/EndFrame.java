@@ -18,6 +18,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Action;
 
+/**
+ * Frame for the "Congrats" window
+ * @author paulhorton
+ * @version 1.0
+ */
 public class EndFrame extends JFrame {
 
 	private JPanel contentPane;

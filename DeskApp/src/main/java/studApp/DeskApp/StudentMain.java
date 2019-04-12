@@ -1,9 +1,6 @@
-/* FOR TESTING PURPOSE ONLY - DELETE FROM FINAL RELEASE */
-
 package studApp.DeskApp;
 
 import java.awt.EventQueue;
-import java.util.List;
 
 import studApp.DeskApp.controllers.QuestionController;
 import studApp.DeskApp.controllers.QuizListController;

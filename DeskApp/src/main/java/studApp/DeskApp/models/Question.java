@@ -5,10 +5,11 @@ import java.util.List;
 /**
  * @author amankaushik
  */
+
 public abstract class Question {
-  /* Question text */
+  // Question text
   private String title;
-  /* List of available answer choices */
+  // List of available answer choices
   private List<String> options;
   private String correctAnswer;
 

@@ -12,13 +12,13 @@ import studApp.DeskApp.models.QuizQuestion;
 import java.lang.reflect.Type;
 
 /**
+ * Since "Question" is an abstract class the gson library cannot create an object of that class.
+ * To deserialize the JSON file to a "QuizDAO" object (which has a list of "Question"(s)) this
+   adapter was needed.
+
  * @author amankaushik
  */
 
-/* Since "Question" is an abstract class the gson library cannot create an object of that class.
-To deserialize the JSON file to a "QuizDAO" object (which has a list of "Question"(s)) this
- adapter was needed.
-*/
 class QuizQuestionTypeAdapter implements JsonDeserializer<Question> {
 
   @Override

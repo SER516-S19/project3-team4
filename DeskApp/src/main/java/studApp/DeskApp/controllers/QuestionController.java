@@ -1,7 +1,7 @@
-package studApp.DeskApp;
+package studApp.DeskApp.controllers;
 
-import studApp.DeskApp.dao.Question;
-import studApp.DeskApp.dao.QuizDAO;
+import studApp.DeskApp.models.Question;
+import studApp.DeskApp.models.QuizDAO;
 
 /**
  * Controller for a quiz. Takes in a QuizDAO
@@ -17,7 +17,7 @@ public class QuestionController {
 	int currentQuestion;
 	int quizLength;
 	
-	QuestionController() {
+	public QuestionController() {
 		currentQuestion = 0;
 	}
 	

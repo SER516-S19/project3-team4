@@ -1,4 +1,4 @@
-package studApp.DeskApp;
+package studApp.DeskApp.views;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,7 +6,8 @@ import java.util.List;
 
 import javax.swing.*;
 
-import studApp.DeskApp.dao.QuizDAO;
+import studApp.DeskApp.controllers.QuizListController;
+import studApp.DeskApp.models.QuizDAO;
 
 /**
  * This frame will list a button for each quiz. When the button is click, the corresponding quiz frame

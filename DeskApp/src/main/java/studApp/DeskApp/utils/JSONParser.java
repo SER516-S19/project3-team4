@@ -1,6 +1,10 @@
-package studApp.DeskApp.operations;
+package studApp.DeskApp.utils;
 
 import com.google.gson.GsonBuilder;
+
+import studApp.DeskApp.models.Question;
+import studApp.DeskApp.models.QuizDAO;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,8 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import studApp.DeskApp.dao.Question;
-import studApp.DeskApp.dao.QuizDAO;
 
 /**
  * @author amankaushik

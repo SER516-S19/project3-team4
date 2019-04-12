@@ -21,6 +21,10 @@ public class QuestionController {
 		currentQuestion = 0;
 	}
 	
+	/**
+	 * Sets the quiz model for the controller to pass to the view
+	 * @param quizDAO
+	 */
 	public void setQuiz(QuizDAO quizDAO) {
 		this.quiz = quizDAO;
 		quizLength = quiz.getQuestionList().size();

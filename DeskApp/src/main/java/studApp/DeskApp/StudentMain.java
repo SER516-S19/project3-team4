@@ -7,15 +7,16 @@ import java.util.List;
 
 import studApp.DeskApp.controllers.QuestionController;
 import studApp.DeskApp.controllers.QuizListController;
-import studApp.DeskApp.models.QuizDAO;
-import studApp.DeskApp.utils.JSONParser;
+
 import studApp.DeskApp.views.EndFrame;
 import studApp.DeskApp.views.QuestionFrame;
 import studApp.DeskApp.views.QuizListFrame;
 
 /**
+ * Main functionality to run the student's quiz
  * @author amankaushik
  * @author paulhorton
+ * @version 1.3
  */
 public class StudentMain {
 

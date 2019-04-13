@@ -1,4 +1,4 @@
-package profApp.DeskApp;
+package profApp.DeskApp.Views;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,41 +18,51 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import profApp.model.Question;
-import profApp.model.Quiz;
+
+import profApp.DeskApp.model.Question;
+import profApp.DeskApp.model.Quiz;
+import profApp.Utils.QuizConstants;
 
 /**
  * AddQuestionsWindow class: This class displays option to add question, options
  * and correct answer and saves the quiz.
+ * 
  * @author akashkadam, truptikhatavkar
  * @version 1.3
  */
 public class AddQuestionsWindow extends JFrame {
-	private final String FOLDER_PATH = "./quizzes/";
+	private final String FOLDER_PATH = QuizConstants.directoryName;
 	private JTextField questionTitle;
 	private JTextField firstOption;
 	private JTextField secondOption;
 	private JTextField thirdOption;
 	private JTextField fourthOption;
 	private JTextField correctOption;
-	
+
 	/**
-	* Parametarized constructor that sets background and calls initialize function.
-	* @param quizName name of the quiz
-	* @param questionsList list of all the questions in the quiz
-	*/
+	 * Parametarized constructor that sets background and calls initialize function.
+	 * 
+	 * @param quizName
+	 *            name of the quiz
+	 * @param questionsList
+	 *            list of all the questions in the quiz
+	 */
 	public AddQuestionsWindow(String quizName, ArrayList<Question> questionsList) {
 		setBackground(new Color(248, 248, 255));
 		initialize(quizName, questionsList);
 	}
 
 	/**
-	* This method initializes all the components of the UI.
-	* @param quizName name of the quiz
-	* @param questionsList list of all the questions in the quiz
-	*/
+	 * This method initializes all the components of the UI.
+	 * 
+	 * @param quizName
+	 *            name of the quiz
+	 * @param questionsList
+	 *            list of all the questions in the quiz
+	 */
 	private void initialize(final String quizName, final ArrayList<Question> questionsList) {
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		this.setMaximizedBounds(env.getMaximumWindowBounds());
@@ -139,9 +150,9 @@ public class AddQuestionsWindow extends JFrame {
 		AddMoreQuestions.setBackground(SystemColor.scrollbar);
 		AddMoreQuestions.setFont(new java.awt.Font("Arial", Font.BOLD, 14));
 		AddMoreQuestions.addActionListener(new ActionListener() {
-			@Override
+
 			public void actionPerformed(ActionEvent e) {
-				ArrayList<Question> questions = new ArrayList<>();
+				ArrayList<Question> questions = new ArrayList<Question>();
 				if (questionsList != null) {
 					for (Question question : questionsList) {
 						questions.add(question);
@@ -162,7 +173,7 @@ public class AddQuestionsWindow extends JFrame {
 		Submit.setBackground(SystemColor.scrollbar);
 		Submit.setForeground(Color.BLACK);
 		Submit.addActionListener(new ActionListener() {
-			@Override
+
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<Question> questions = questionsList;
 				questions = populateQuestionList(questions);
@@ -178,12 +189,17 @@ public class AddQuestionsWindow extends JFrame {
 	}
 
 	/**
-	* This method saves the quiz in JSON file.
-	* @param quizName name of the quiz
-	* @param questionsList list of all the questions in the quiz
-	*/
+	 * This method saves the quiz in JSON file.
+	 * 
+	 * @param quizName
+	 *            name of the quiz
+	 * @param questionsList
+	 *            list of all the questions in the quiz
+	 */
 	private void createQuiz(String quizName, ArrayList<Question> questionsList) {
-		String filename = FOLDER_PATH + quizName + ".json";
+		String filename = FOLDER_PATH + "\\" + quizName + ".json";
+		System.out.println(FOLDER_PATH + "::::::" + quizName);
+		System.out.println(filename);
 		Quiz quiz = new Quiz(questionsList);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String json = gson.toJson(quiz);
@@ -199,9 +215,11 @@ public class AddQuestionsWindow extends JFrame {
 	}
 
 	/**
-	* This method populates all the questions in questionList
-	* @param questionsList list of all the questions in the quiz
-	*/
+	 * This method populates all the questions in questionList
+	 * 
+	 * @param questionsList
+	 *            list of all the questions in the quiz
+	 */
 	private ArrayList<Question> populateQuestionList(ArrayList<Question> questionsList) {
 		Question question = new Question();
 		question.setTitle(questionTitle.getText());
@@ -213,7 +231,7 @@ public class AddQuestionsWindow extends JFrame {
 		if (questionsList != null && questionsList.size() > 0) {
 			questionsList.add(question);
 		} else {
-			questionsList = new ArrayList<>();
+			questionsList = new ArrayList<Question>();
 			questionsList.add(question);
 		}
 

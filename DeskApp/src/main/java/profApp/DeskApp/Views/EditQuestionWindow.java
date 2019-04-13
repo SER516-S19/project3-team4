@@ -20,6 +20,12 @@ import profApp.DeskApp.Controller.EditQuizController;
 import profApp.DeskApp.model.Question;
 import profApp.Utils.QuizConstants;
 
+/**
+ * This Class creates edit quiz window and its basic functions.
+ * 
+ * @author Kumar Kalyan Prabhu, Kirti Jha and Harshita Kajal
+ *
+ */
 public class EditQuestionWindow extends JFrame implements ActionListener {
 
 	JButton btnNext;
@@ -54,7 +60,6 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 
 	}
 	
-
 	private void setCorrectAnswerChoices(Question question) {
 		String choices[] = null;
 		correctChoice = new JComboBox<String>();
@@ -69,9 +74,11 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 				option2.setText(question.getOptions().get(1));
 				option3.setText(question.getOptions().get(2));
 				option4.setText(question.getOptions().get(3));
-				System.out.println(question.getOptions().indexOf(question.getCorrectAnswer()));
+				System.out.println(question.getOptions().
+						indexOf(question.getCorrectAnswer()));
 				correctChoice.setSelectedItem(
-						QuizConstants.options[question.getOptions().indexOf(question.getCorrectAnswer())]);
+						QuizConstants.options[question.getOptions().
+						                      indexOf(question.getCorrectAnswer())]);
 			}
 			questionTitle.setText(question.getTitle());
 			choices = QuizConstants.options;
@@ -216,8 +223,6 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		getContentPane().add(lblCorrectAnswer);
 	}
 	
-	
-
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(btnNext)) {
 			if (e.getActionCommand().equalsIgnoreCase(QuizConstants.BUTTON_LABEL_NEXT)) {
@@ -225,15 +230,11 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 				question.setTitle(questionTitle.getText());
 				if (question.getOptions() == null)
 					question.setOptionsList();
-
 				setQuestion();
-
 				editQuiz.setQuestion(index, question);
 				editQuiz.setIndex(index + 1);
 				editQuiz.startEdit();
-
 			}
-
 		}
 		if (e.getSource().equals(btnBack)) {
 			if (e.getActionCommand().equalsIgnoreCase(QuizConstants.BUTTON_LABEL_BACK)) {
@@ -243,10 +244,8 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 					editQuiz.setQuestion(index, question);
 					editQuiz.setIndex(index - 1);
 					editQuiz.startEdit();
-
 				}
 			}
-
 		}
 		if (e.getSource().equals(btnCancel)) {
 			if (e.getActionCommand().equalsIgnoreCase(QuizConstants.BUTTON_LABEL_CANCEL))
@@ -265,7 +264,6 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 				}
 			}
 		}
-
 	}
 
 	private void setQuestion() {
@@ -276,6 +274,4 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		String splitter[] = ((String) correctChoice.getSelectedItem()).split(" ");
 		question.setCorrectAnswer(question.getOptions().get(Integer.parseInt(splitter[1]) - 1));
 	}
-	
-	
 }

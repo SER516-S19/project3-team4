@@ -54,10 +54,10 @@ public class ApplicationWindow extends JFrame implements ActionListener {
 		
 		jButtonCreate.addMouseListener(new MouseAdapter() {
 			public void mouseExited(MouseEvent event) {
-		        jButtonEdit.setBackground(UIManager.getColor("control"));
+		        jButtonCreate.setBackground(UIManager.getColor("control"));
 		    }
 		    public void mouseEntered(MouseEvent evt) {
-		        jButtonEdit.setBackground(Color.GREEN);
+		        jButtonCreate.setBackground(Color.GREEN);
 		    }
 		});
 		jButtonEdit.addMouseListener(new MouseAdapter() {

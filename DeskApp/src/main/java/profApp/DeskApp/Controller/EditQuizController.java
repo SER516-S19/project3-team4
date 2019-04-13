@@ -15,6 +15,13 @@ import profApp.DeskApp.model.Quiz;
 import profApp.Utils.QuizConstants;
 import profApp.Utils.QuizUtils;
 
+/**
+ * This is controller class which handles request for 1. SetQuestion
+ * 2. Replace Question.
+ * 
+ * @author kirti Jha and Kumar Prabhu Kalyan
+ * 
+ */
 public class EditQuizController {
 
 	String filePath;
@@ -37,6 +44,12 @@ public class EditQuizController {
 		this.startEdit();
 	}
 
+	/**
+	 * This method allows to edit question window.
+	 * 
+	 * @param
+	 * @return
+	 */
 	public void startEdit() {
 
 		System.out.println(listQuestions.size());
@@ -46,24 +59,24 @@ public class EditQuizController {
 			SaveDialog save = new SaveDialog(this, QuizConstants.noQuestionMesage);
 			
 		}else {
-		if (listQuestions.size() > 0 && this.index < listQuestions.size()) {
-			System.out.println(index+":::::::"+listQuestions.size());
-			Question question = listQuestions.get(index);
-			if (currentWindow != null) {
-				currentWindow.dispose();
-				currentWindow = new EditQuestionWindow(index, question, this);
-
-			} else {
-				currentWindow = new EditQuestionWindow(index, question, this);
+			if (listQuestions.size() > 0 && this.index < listQuestions.size()) {
+				System.out.println(index+":::::::"+listQuestions.size());
+				Question question = listQuestions.get(index);
+				if (currentWindow != null) {
+					currentWindow.dispose();
+					currentWindow = new EditQuestionWindow(index, question, this);
+	
+				} else {
+					currentWindow = new EditQuestionWindow(index, question, this);
+				}
+	
+			}else {
+				if (index >= listQuestions.size()) {
+		
+					System.out.println("Save dialog");
+					SaveDialog save = new SaveDialog(this, QuizConstants.saveDialogMessage);
+				}
 			}
-
-		}else {
-		if (index >= listQuestions.size()) {
-
-			System.out.println("Save dialog");
-			SaveDialog save = new SaveDialog(this, QuizConstants.saveDialogMessage);
-		}
-		}
 		}
 	}
 

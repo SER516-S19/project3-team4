@@ -53,7 +53,6 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		getContentPane().add(questionTitle);
 		questionTitle.setEditable(true);
 
-<<<<<<< Updated upstream
 		option1 = new JFormattedTextField();
 		option1.setBounds(31, 154, 348, 20);
 		getContentPane().add(option1);
@@ -75,11 +74,9 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		option4.setEditable(true);
 
 		String choices[] = null;
-=======
+
 		addOptionFields();
 		
-		String choices[]=null;
->>>>>>> Stashed changes
 		correctChoice = new JComboBox<String>();
 		if (question != null) {
 			for (int i = 0; i < QuizConstants.options.length; i++) {
@@ -184,18 +181,10 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 				question.setTitle(questionTitle.getText());
 				if (question.getOptions() == null)
 					question.setOptionsList();
-<<<<<<< Updated upstream
-				question.getOptions().set(0, option1.getText());
-				question.getOptions().set(1, option2.getText());
-				question.getOptions().set(2, option3.getText());
-				question.getOptions().set(3, option4.getText());
-				String splitter[] = ((String) correctChoice.getSelectedItem()).split(" ");
-				question.setCorrectAnswer(question.getOptions().get(Integer.parseInt(splitter[1]) - 1));
                     								
-=======
+
 				setQuestion();
 
->>>>>>> Stashed changes
 				editQuiz.setQuestion(index, question);
 				editQuiz.setIndex(index + 1);
 				editQuiz.startEdit();
@@ -204,7 +193,6 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 
 		}
 		if (e.getSource().equals(btnBack)) {
-<<<<<<< Updated upstream
 			if (e.getActionCommand().equalsIgnoreCase("Back")) {
 
 				if(index>0) {
@@ -219,7 +207,7 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 				editQuiz.setQuestion(index, question);
 				editQuiz.setIndex(index - 1);
 				editQuiz.startEdit();
-=======
+
 				if (e.getActionCommand().equalsIgnoreCase("Back")) {
                     if(index>0) {
 					setQuestion();
@@ -227,7 +215,6 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 					editQuiz.setIndex(index - 1);
 					editQuiz.startEdit();
                     }
->>>>>>> Stashed changes
 				}
 			}
 
@@ -250,6 +237,7 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		}
 
 	}
+}
 
 	private void setQuestion() {
 		question.getOptions().set(0,option1.getText());

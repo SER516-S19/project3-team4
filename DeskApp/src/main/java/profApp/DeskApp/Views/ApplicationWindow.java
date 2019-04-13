@@ -45,10 +45,11 @@ public class ApplicationWindow extends JFrame implements ActionListener {
 
 		jButtonCreate.setBounds(99, 179, 124, 23);
 		jButtonEdit.setBounds(233, 179, 137, 23);
-		JLabel jLblWelcome = new JLabel("Welcome to the Quiz App");
-		jLblWelcome.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 17));
+		
+		JLabel jLblWelcome = new JLabel("Welcome to the Quiz");	
 		jLblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
-		jLblWelcome.setBounds(121, 21, 178, 20);
+		jLblWelcome.setFont(new Font("Century Gothic",Font.BOLD | Font.ITALIC, 17));
+		jLblWelcome.setBounds(60, 35, 339, 56);
 		panel.add(jLblWelcome);
 		
 		jButtonCreate.addMouseListener(new MouseAdapter() {
@@ -79,8 +80,6 @@ public class ApplicationWindow extends JFrame implements ActionListener {
 				EditQuizWindow edit = new EditQuizWindow();
 				edit.setVisible(true);
 			}
-
 		}
-
 	}
 }

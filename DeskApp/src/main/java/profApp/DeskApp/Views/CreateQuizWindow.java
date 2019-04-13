@@ -1,4 +1,4 @@
-package profApp.DeskApp;
+package profApp.DeskApp.Views;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -15,9 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import profApp.Utils.QuizConstants;
+
 /**
  * CreateQuizWindow class: This class displays the option to enter quiz title
  * and checks if the quiz already exists.
+ * 
  * @author akashkadam, truptikhatavkar
  * @version 1.3
  */
@@ -25,12 +28,13 @@ public class CreateQuizWindow extends JFrame {
 
 	private JFrame frame;
 	private JTextField quizTitleInput;
-	private final String FOLDER_PATH = "./quizzes/";
+	private final String FOLDER_PATH = QuizConstants.directoryName;
 
 	/**
-	* Constructor to initialize all the components of UI.
-	*/
+	 * Constructor to initialize all the components of UI.
+	 */
 	public CreateQuizWindow() {
+
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		this.setMaximizedBounds(env.getMaximumWindowBounds());
 		this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
@@ -71,19 +75,20 @@ public class CreateQuizWindow extends JFrame {
 		submit.setBackground(SystemColor.scrollbar);
 		submit.setFont(new Font("Arial", Font.BOLD, 14));
 		submit.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-		String fileName = FOLDER_PATH + quizTitleInput.getText() + ".json";
-		File file = new File(fileName);
-		if (file.exists() && file.isFile()) {
-			quizExists.setText("Quiz exists");
-		} else {
-			AddQuestionsWindow addQuestions = new AddQuestionsWindow(quizTitleInput.getText(), null);
-			addQuestions.setVisible(true);
-			dispose();
-		}
-		}
+			public void actionPerformed(ActionEvent e) {
+				String fileName = FOLDER_PATH + "\\" + quizTitleInput.getText() + ".json";
+				File file = new File(fileName);
+				if (file.exists() && file.isFile()) {
+					quizExists.setText("Quiz exists");
+				} else {
+					AddQuestionsWindow addQuestions = new AddQuestionsWindow(quizTitleInput.getText(), null);
+					addQuestions.setVisible(true);
+					dispose();
+				}
+			}
 		});
 		submit.setBounds(587, 332, 230, 40);
 		panel.add(submit);
+		this.setVisible(true);
 	}
 }

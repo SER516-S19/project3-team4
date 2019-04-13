@@ -13,6 +13,11 @@ import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 import java.awt.Font;
 
+/**
+ * This class is the view class for Save options dialog.
+ * @author kumar
+ *
+ */
 public class SaveDialog extends JDialog implements ActionListener{
 
 	JButton buttonYes;
@@ -22,6 +27,11 @@ public class SaveDialog extends JDialog implements ActionListener{
 	private JButton btnNewButton;
 	private JButton buttonAddQuestion;
 	JButton buttonPreview;
+	/**
+	 * This constructor initializes the view.
+	 * @param editQuizController
+	 * @param message
+	 */
 	public SaveDialog(EditQuizController editQuizController,String message) {
 		getContentPane().setLayout(null);
 		this.editQuizController =editQuizController;
@@ -34,6 +44,15 @@ public class SaveDialog extends JDialog implements ActionListener{
 		lblDoYouWish.setBounds(42, 40, 484, 36);
 		getContentPane().add(lblDoYouWish);
 		
+		addButtons();
+				
+		this.setVisible(true);
+	}
+
+	/**
+	 * This method adds buttons to the views.
+	 */
+	private void addButtons() {
 		buttonYes = createButtons("Yes", 81, 105, 126, 23);
 		getContentPane().add(buttonYes);
 		
@@ -48,10 +67,17 @@ public class SaveDialog extends JDialog implements ActionListener{
 		
 	    buttonPreview = createButtons("Preview Quiz", 332, 170, 126, 23);
 		getContentPane().add(buttonPreview);
-				
-		this.setVisible(true);
 	}
 	
+	/**
+	 * This is a helper method to create buttons.
+	 * @param name
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @return
+	 */
 	public JButton createButtons(String name,int x, int y,int width, int height) {
 		JButton newButton = new JButton(name);
 		newButton.addActionListener(this);
@@ -59,6 +85,9 @@ public class SaveDialog extends JDialog implements ActionListener{
 		return newButton;
 	}
 
+	/**
+	 * This method is the event handler for the view.
+	 */
 	public void actionPerformed(ActionEvent event) {
 		if(event.getSource().equals(buttonYes))
 		{

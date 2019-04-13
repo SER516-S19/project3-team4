@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
 
 /**
@@ -28,6 +29,14 @@ public class ApplicationWindow extends JFrame implements ActionListener {
 		this.setTitle("Professor Application");
 		this.setBounds(400, 400, 500, 500);
 
+		initializeView();
+
+	}
+
+	/**
+	 * This method initializes the Panels and buttons for the application window.
+	 */
+	private void initializeView() {
 		panel = new JPanel();
 		getContentPane().add(panel);
 		jButtonEdit = new JButton("Edit Quiz");
@@ -45,21 +54,28 @@ public class ApplicationWindow extends JFrame implements ActionListener {
 		jLblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 		jLblWelcome.setBounds(121, 21, 178, 20);
 		panel.add(jLblWelcome);
-
 	};
 
+	/**
+	 * This method is the event handler for the Frame.
+	 */
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getActionCommand().equals("Edit Quiz")) {
 
 			JButton buttonPressed = (JButton) arg0.getSource();
-			if (buttonPressed.getText().equalsIgnoreCase("Edit Quiz"))
-				;
-			{
+			if (buttonPressed.getText().equalsIgnoreCase("Edit Quiz")) {
 				EditQuizWindow edit = new EditQuizWindow();
 				edit.setVisible(true);
 			}
 
 		}
 
+		if (arg0.getSource().equals(jButtonCreate)) {
+			if (arg0.getActionCommand().equals("Create Quiz")) {
+				CreateQuizWindow createQuiz = new CreateQuizWindow();
+				createQuiz.setVisible(true);
+				dispose();
+			}
+		}
 	}
 }

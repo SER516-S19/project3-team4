@@ -2,8 +2,9 @@ package profApp.DeskApp.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Quiz implements Serializable{
+public class Quiz implements Serializable {
 	private ArrayList<Question> questions;
 
 	/**
@@ -17,5 +18,10 @@ public class Quiz implements Serializable{
 
 	public ArrayList<Question> getQuestionList() {
 		return questions;
+	}
+
+	public void setQuestionList(List<Question> listQuestions) {
+		questions = (ArrayList<Question>) listQuestions;
+
 	}
 }

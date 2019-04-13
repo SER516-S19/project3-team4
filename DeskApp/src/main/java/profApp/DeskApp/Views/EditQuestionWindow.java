@@ -33,6 +33,13 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 	int index;
 	private JButton buttonRemove;
 
+	/**
+	 * This is the parameterized constructor for the EditQuestion window.
+	 * 
+	 * @param index
+	 * @param question
+	 * @param editQuiz
+	 */
 	public EditQuestionWindow(int index, Question question, EditQuizController editQuiz) {
 		getContentPane().setLayout(null);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -50,6 +57,11 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 
 	}
 
+	/**
+	 * This methods sets the jComboBox for selection of answer with choices.
+	 * 
+	 * @param question
+	 */
 	private void setCorrectAnswerChoices(Question question) {
 		String choices[] = null;
 		correctChoice = new JComboBox<String>();
@@ -64,7 +76,6 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 				option2.setText(question.getOptions().get(1));
 				option3.setText(question.getOptions().get(2));
 				option4.setText(question.getOptions().get(3));
-				System.out.println(question.getOptions().indexOf(question.getCorrectAnswer()));
 				correctChoice.setSelectedItem(
 						QuizConstants.options[question.getOptions().indexOf(question.getCorrectAnswer())]);
 			}
@@ -77,6 +88,9 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		correctChoice.setEditable(true);
 	}
 
+	/**
+	 * This methods sets the text fiekds for the view.
+	 */
 	private void setFields() {
 		questionTitle = new JFormattedTextField();
 		questionTitle.setBounds(31, 36, 348, 58);
@@ -104,6 +118,9 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		option4.setEditable(true);
 	}
 
+	/**
+	 * This methods adds buttons to the view.
+	 */
 	private void addButtons() {
 		btnNext = new JButton(QuizConstants.BUTTON_LABEL_NEXT);
 		btnNext.setBounds(31, 436, 89, 23);
@@ -126,6 +143,9 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		getContentPane().add(buttonRemove);
 	}
 
+	/**
+	 * This method adds editable option fields for the view.
+	 */
 	private void addOptionFields() {
 		option1 = new JFormattedTextField();
 		option1.setBounds(31, 154, 348, 20);
@@ -148,6 +168,9 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		option4.setEditable(true);
 	}
 
+	/**
+	 * This method adds required labels to the veiws.
+	 */
 	private void setLabels() {
 		JLabel lblOption = new JLabel("Option 1");
 		lblOption.setBounds(31, 129, 76, 14);
@@ -175,19 +198,14 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		getContentPane().add(lblCorrectAnswer);
 	}
 
+	/**
+	 * This is the event handler for the views .
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(btnNext)) {
 			if (e.getActionCommand().equalsIgnoreCase(QuizConstants.BUTTON_LABEL_NEXT)) {
 
-				question.setTitle(questionTitle.getText());
-				if (question.getOptions() == null)
-					question.setOptionsList();
-
-				setQuestion();
-
-				editQuiz.setQuestion(index, question);
-				editQuiz.setIndex(index + 1);
-				editQuiz.startEdit();
+				onNextHandler();
 
 			}
 
@@ -195,13 +213,7 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		if (e.getSource().equals(btnBack)) {
 			if (e.getActionCommand().equalsIgnoreCase(QuizConstants.BUTTON_LABEL_BACK)) {
 
-				if (index > 0) {
-					setQuestion();
-					editQuiz.setQuestion(index, question);
-					editQuiz.setIndex(index - 1);
-					editQuiz.startEdit();
-
-				}
+				onBackHandler();
 			}
 
 		}
@@ -212,19 +224,56 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		}
 		if (e.getSource().equals(buttonRemove)) {
 			if (e.getActionCommand().equalsIgnoreCase(QuizConstants.BUTTON_LABEL_REMOVE)) {
-				System.out.println("removing");
-				this.dispose();
-				if (editQuiz.remove(question)) {
-					editQuiz.setIndex(index);
-					editQuiz.startEdit();
-				} else {
-					editQuiz.startEdit();
-				}
+				onRemoveHandler();
 			}
 		}
 
 	}
 
+	/**
+	 * This method is the helper for Remove button.
+	 */
+	private void onRemoveHandler() {
+		this.dispose();
+		if (editQuiz.remove(question)) {
+			editQuiz.setIndex(index);
+			editQuiz.startEdit();
+		} else {
+			editQuiz.startEdit();
+		}
+	}
+
+	/**
+	 * This method is the helper for Back button.
+	 */
+	private void onBackHandler() {
+		if (index > 0) {
+			setQuestion();
+			editQuiz.setQuestion(index, question);
+			editQuiz.setIndex(index - 1);
+			editQuiz.startEdit();
+
+		}
+	}
+
+	/**
+	 * This method is the helper for Next button.
+	 */
+	private void onNextHandler() {
+		question.setTitle(questionTitle.getText());
+		if (question.getOptions() == null)
+			question.setOptionsList();
+
+		setQuestion();
+
+		editQuiz.setQuestion(index, question);
+		editQuiz.setIndex(index + 1);
+		editQuiz.startEdit();
+	}
+
+	/**
+	 * This saves the changes to the question object and updates the index field.
+	 */
 	private void setQuestion() {
 		question.getOptions().set(0, option1.getText());
 		question.getOptions().set(1, option2.getText());

@@ -21,7 +21,7 @@ import profApp.DeskApp.model.Question;
 import profApp.Utils.QuizConstants;
 
 /**
- * This Class creates edit quiz window and its basic functions.
+ * This Class creates edit question window and its basic functions.
  * 
  * @author Kumar Kalyan Prabhu, Kirti Jha and Harshita Kajal
  *

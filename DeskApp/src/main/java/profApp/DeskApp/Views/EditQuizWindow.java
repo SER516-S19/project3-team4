@@ -47,6 +47,7 @@ public class EditQuizWindow extends JFrame implements ActionListener {
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 		JLabel lblNewLabel = createLabels("Please select quiz to edit!! ");
+
 		editPanel.add(lblNewLabel);
 
 		quizSelector = new JComboBox();
@@ -73,28 +74,29 @@ public class EditQuizWindow extends JFrame implements ActionListener {
 		File[] listFiles = QuizUtils.listFiles(QuizConstants.directoryName);
 		System.out.println(listFiles.length);
 		System.out.println(QuizConstants.directoryName);
-		String quizzes[] = new String[listFiles.length];
-		String fileName = null;
+String quizzes [] = new String[listFiles.length];
+		String fileName =null;
 		mapChoice = new HashMap();
-		int k = 0;
-		if (listFiles.length > 0) {
-			for (int i = 0; i < listFiles.length; i++) {
-				System.out.println(listFiles[i].getName());
-				if (FilenameUtils.getExtension(listFiles[i].getName()).equalsIgnoreCase("json")
-						&& k < listFiles.length) {
-					fileName = FilenameUtils.getBaseName(FilenameUtils.getName(listFiles[i].getName()));
-					quizzes[k] = fileName;
-					mapChoice.put(fileName, listFiles[i].getAbsolutePath());
-					quizSelector.addItem(fileName);
-					k++;
-				}
+		int k =0;
+		if(listFiles.length>0) {
+		for(int i=0;i<listFiles.length;i++)
+		{
+			System.out.println(listFiles[i].getName());
+			if(FilenameUtils.getExtension(listFiles[i].getName()).equalsIgnoreCase("json") && k<listFiles.length) {
+			fileName = FilenameUtils.getBaseName(FilenameUtils.getName(listFiles[i].getName()));
+			quizzes[k] = fileName;
+			mapChoice.put(fileName, listFiles[i].getAbsolutePath());
+			quizSelector.addItem(fileName);
+			k++;
 			}
 
 			quizSelector.addActionListener(this);
 			editPanel.add(quizSelector);
 			editPanel.setVisible(true);
 			getContentPane().add(editPanel);
-		} else {
+		}
+		}
+		else {
 			ErrorScreen error = new ErrorScreen("No quizzes added, Please add them");
 		}
 	}
@@ -119,7 +121,9 @@ public class EditQuizWindow extends JFrame implements ActionListener {
 	public JButton createButtons(String name) {
 		JButton newButton = new JButton(name);
 		newButton.addActionListener(this);
-		newButton.setBounds(257, 306, 89, 23);
+
+		newButton.setBounds(185, 309, 89, 23);		
+
 		return newButton;
 	}
 
@@ -127,11 +131,13 @@ public class EditQuizWindow extends JFrame implements ActionListener {
 	 * This method is the event handler for the view.
 	 */
 	public void actionPerformed(ActionEvent e) {
+
 		if (e.getSource().equals(btnOk)) {
 			if (e.getActionCommand().equalsIgnoreCase("Ok")) {
 				this.dispose();
 				EditQuizController edit = new EditQuizController(mapChoice.get(quizSelector.getSelectedItem()));
 			}
+
 		}
 		if (e.getSource().equals(btnCancel)) {
 			if (e.getActionCommand().equalsIgnoreCase("Cancel")) {

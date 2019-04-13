@@ -2,6 +2,8 @@ package profApp.DeskApp.Views;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -15,7 +17,7 @@ import java.awt.Font;
 /**
  * This Class creates the application window.
  * 
- * @author Kumar Kalyan Prabhu and Kirti Jha
+ * @author Kumar Kalyan Prabhu, Kirti Jha and Harshita Kajal
  *
  */
 public class ApplicationWindow extends JFrame implements ActionListener {
@@ -49,11 +51,13 @@ public class ApplicationWindow extends JFrame implements ActionListener {
 
 		jButtonCreate.setBounds(99, 179, 124, 23);
 		jButtonEdit.setBounds(233, 179, 137, 23);
-		JLabel jLblWelcome = new JLabel("Welcome to the Quiz App");
-		jLblWelcome.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 17));
+		
+		JLabel jLblWelcome = new JLabel("Welcome to the Quiz");	
 		jLblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
-		jLblWelcome.setBounds(121, 21, 178, 20);
+		jLblWelcome.setFont(new Font("Century Gothic",Font.BOLD | Font.ITALIC, 17));
+		jLblWelcome.setBounds(60, 35, 339, 56);
 		panel.add(jLblWelcome);
+
 	};
 
 	/**
@@ -67,8 +71,8 @@ public class ApplicationWindow extends JFrame implements ActionListener {
 				EditQuizWindow edit = new EditQuizWindow();
 				edit.setVisible(true);
 			}
-
 		}
+
 
 		if (arg0.getSource().equals(jButtonCreate)) {
 			if (arg0.getActionCommand().equals("Create Quiz")) {
@@ -77,5 +81,6 @@ public class ApplicationWindow extends JFrame implements ActionListener {
 				dispose();
 			}
 		}
+
 	}
 }

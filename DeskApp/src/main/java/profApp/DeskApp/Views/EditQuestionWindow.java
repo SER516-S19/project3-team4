@@ -1,8 +1,11 @@
 package profApp.DeskApp.Views;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,11 +14,18 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.UIManager;
 
 import profApp.DeskApp.Controller.EditQuizController;
 import profApp.DeskApp.model.Question;
 import profApp.Utils.QuizConstants;
 
+/**
+ * This Class creates edit question window and its basic functions.
+ * 
+ * @author Kumar Kalyan Prabhu, Kirti Jha and Harshita Kajal
+ *
+ */
 public class EditQuestionWindow extends JFrame implements ActionListener {
 
 	JButton btnNext;
@@ -62,6 +72,7 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 	 * 
 	 * @param question
 	 */
+
 	private void setCorrectAnswerChoices(Question question) {
 		String choices[] = null;
 		correctChoice = new JComboBox<String>();
@@ -76,6 +87,9 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 				option2.setText(question.getOptions().get(1));
 				option3.setText(question.getOptions().get(2));
 				option4.setText(question.getOptions().get(3));
+
+				System.out.println(question.getOptions().indexOf(question.getCorrectAnswer()));
+
 				correctChoice.setSelectedItem(
 						QuizConstants.options[question.getOptions().indexOf(question.getCorrectAnswer())]);
 			}
@@ -141,6 +155,46 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		buttonRemove.setBounds(416, 177, 145, 23);
 		buttonRemove.addActionListener(this);
 		getContentPane().add(buttonRemove);
+
+		btnNext.addMouseListener(new MouseAdapter() {
+			public void mouseExited(MouseEvent event) {
+				btnNext.setBackground(UIManager.getColor("control"));
+			}
+
+			public void mouseEntered(MouseEvent evt) {
+				btnNext.setBackground(Color.GREEN);
+			}
+		});
+
+		btnBack.addMouseListener(new MouseAdapter() {
+			public void mouseExited(MouseEvent event) {
+				btnBack.setBackground(UIManager.getColor("control"));
+			}
+
+			public void mouseEntered(MouseEvent evt) {
+				btnBack.setBackground(Color.GREEN);
+			}
+		});
+
+		btnCancel.addMouseListener(new MouseAdapter() {
+			public void mouseExited(MouseEvent event) {
+				btnCancel.setBackground(UIManager.getColor("control"));
+			}
+
+			public void mouseEntered(MouseEvent evt) {
+				btnCancel.setBackground(Color.GREEN);
+			}
+		});
+
+		buttonRemove.addMouseListener(new MouseAdapter() {
+			public void mouseExited(MouseEvent event) {
+				buttonRemove.setBackground(UIManager.getColor("control"));
+			}
+
+			public void mouseEntered(MouseEvent evt) {
+				buttonRemove.setBackground(Color.GREEN);
+			}
+		});
 	}
 
 	/**
@@ -201,33 +255,27 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 	/**
 	 * This is the event handler for the views .
 	 */
+
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(btnNext)) {
 			if (e.getActionCommand().equalsIgnoreCase(QuizConstants.BUTTON_LABEL_NEXT)) {
-
 				onNextHandler();
-
 			}
-
 		}
 		if (e.getSource().equals(btnBack)) {
 			if (e.getActionCommand().equalsIgnoreCase(QuizConstants.BUTTON_LABEL_BACK)) {
-
 				onBackHandler();
 			}
-
 		}
 		if (e.getSource().equals(btnCancel)) {
 			if (e.getActionCommand().equalsIgnoreCase(QuizConstants.BUTTON_LABEL_CANCEL))
 				this.dispose();
-
 		}
 		if (e.getSource().equals(buttonRemove)) {
 			if (e.getActionCommand().equalsIgnoreCase(QuizConstants.BUTTON_LABEL_REMOVE)) {
 				onRemoveHandler();
 			}
 		}
-
 	}
 
 	/**

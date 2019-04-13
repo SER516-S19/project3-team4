@@ -1,0 +1,34 @@
+{
+  "questions": [
+    {
+      "title": "question 1",
+      "options": [
+        "A",
+        "C",
+        "B",
+        "D"
+      ],
+      "correctAnswer": "A"
+    },
+    {
+      "title": "question 2",
+      "options": [
+        "A",
+        "C",
+        "B",
+        "D"
+      ],
+      "correctAnswer": "B"
+    },
+    {
+      "title": "question 3",
+      "options": [
+        "A",
+        "C",
+        "B",
+        "D"
+      ],
+      "correctAnswer": "C"
+    }
+  ]
+}

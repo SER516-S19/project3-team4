@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,38 +17,42 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import profApp.model.Question;
 import profApp.model.Quiz;
 
 /**
  * AddQuestionsWindow class: This class displays option to add question, options
  * and correct answer and saves the quiz.
- *
  * @author akashkadam, truptikhatavkar
  * @version 1.3
  */
 public class AddQuestionsWindow extends JFrame {
-
 	private final String FOLDER_PATH = "./quizzes/";
-
 	private JTextField questionTitle;
 	private JTextField firstOption;
 	private JTextField secondOption;
 	private JTextField thirdOption;
 	private JTextField fourthOption;
 	private JTextField correctOption;
-
+	
+	/**
+	* Parametarized constructor that sets background and calls initialize function.
+	* @param quizName name of the quiz
+	* @param questionsList list of all the questions in the quiz
+	*/
 	public AddQuestionsWindow(String quizName, ArrayList<Question> questionsList) {
 		setBackground(new Color(248, 248, 255));
 		initialize(quizName, questionsList);
 	}
 
+	/**
+	* This method initializes all the components of the UI.
+	* @param quizName name of the quiz
+	* @param questionsList list of all the questions in the quiz
+	*/
 	private void initialize(final String quizName, final ArrayList<Question> questionsList) {
-
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		this.setMaximizedBounds(env.getMaximumWindowBounds());
 		this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
@@ -144,7 +147,6 @@ public class AddQuestionsWindow extends JFrame {
 						questions.add(question);
 					}
 				}
-
 				questions = populateQuestionList(questions);
 				AddQuestionsWindow addQuestions = new AddQuestionsWindow(quizName, questions);
 				addQuestions.setVisible(true);
@@ -175,6 +177,11 @@ public class AddQuestionsWindow extends JFrame {
 		panel.add(Submit);
 	}
 
+	/**
+	* This method saves the quiz in JSON file.
+	* @param quizName name of the quiz
+	* @param questionsList list of all the questions in the quiz
+	*/
 	private void createQuiz(String quizName, ArrayList<Question> questionsList) {
 		String filename = FOLDER_PATH + quizName + ".json";
 		Quiz quiz = new Quiz(questionsList);
@@ -191,6 +198,10 @@ public class AddQuestionsWindow extends JFrame {
 		}
 	}
 
+	/**
+	* This method populates all the questions in questionList
+	* @param questionsList list of all the questions in the quiz
+	*/
 	private ArrayList<Question> populateQuestionList(ArrayList<Question> questionsList) {
 		Question question = new Question();
 		question.setTitle(questionTitle.getText());

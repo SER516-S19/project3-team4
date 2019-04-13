@@ -152,7 +152,7 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		getContentPane().add(btnCancel);
 
 		buttonRemove = new JButton(QuizConstants.BUTTON_LABEL_REMOVE);
-		buttonRemove.setBounds(416, 177, 145, 23);
+		buttonRemove.setBounds(395, 177, 179, 23);
 		buttonRemove.addActionListener(this);
 		getContentPane().add(buttonRemove);
 

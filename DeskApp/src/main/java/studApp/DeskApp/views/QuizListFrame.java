@@ -31,17 +31,11 @@ public class QuizListFrame extends JFrame {
 		setVisible(true);
 	}
 	
-	/**
-	 * initialize the quiz list panel, get the quiz list data and question window list
-	 */
 	private void initialize(List<QuizDAO> quizzes) {
 		panel = new JPanel();
 		qs = quizzes;
 	}
 	
-	/**
-	 * set the size of the frame and style of the panel
-	 */
 	private void stylize() {
 		setBounds(100, 100, 350, 50*qs.size()+50);
 		panel.setBackground(Color.GREEN);

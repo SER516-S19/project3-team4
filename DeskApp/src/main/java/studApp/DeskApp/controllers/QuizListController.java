@@ -9,7 +9,7 @@ import studApp.DeskApp.utils.JSONParser;
 import studApp.DeskApp.views.QuizDirFrame;
 
 /**
- * A basic controller that will initialize the quiz data and all UI components
+ * A basic controller that will initialize and return the quiz data
  * @author Hongfei Ju
  * @version 1.0
  */

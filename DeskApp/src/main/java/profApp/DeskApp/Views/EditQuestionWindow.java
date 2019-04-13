@@ -53,6 +53,7 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		getContentPane().add(questionTitle);
 		questionTitle.setEditable(true);
 
+<<<<<<< Updated upstream
 		option1 = new JFormattedTextField();
 		option1.setBounds(31, 154, 348, 20);
 		getContentPane().add(option1);
@@ -74,6 +75,11 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		option4.setEditable(true);
 
 		String choices[] = null;
+=======
+		addOptionFields();
+		
+		String choices[]=null;
+>>>>>>> Stashed changes
 		correctChoice = new JComboBox<String>();
 		if (question != null) {
 			for (int i = 0; i < QuizConstants.options.length; i++) {
@@ -97,26 +103,17 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		correctChoice.setBounds(31, 389, 348, 20);
 		getContentPane().add(correctChoice);
 		correctChoice.setEditable(true);
-		JLabel lblOption = new JLabel("Option 1");
-		lblOption.setBounds(31, 129, 76, 14);
-		getContentPane().add(lblOption);
-
-		JLabel lblOption_1 = new JLabel("Option 2");
-		lblOption_1.setBounds(31, 181, 65, 14);
-		getContentPane().add(lblOption_1);
-
-		JLabel lblOption_2 = new JLabel("Option 3");
-		lblOption_2.setBounds(31, 231, 76, 14);
-		getContentPane().add(lblOption_2);
-
-		JLabel lblOption_3 = new JLabel("Option 4");
-		lblOption_3.setBounds(31, 285, 76, 14);
-		getContentPane().add(lblOption_3);
+		setOptionLabels();
 
 		JLabel lblCorrectAnswer = new JLabel("Correct Answer:");
 		lblCorrectAnswer.setBounds(31, 364, 97, 14);
 		getContentPane().add(lblCorrectAnswer);
 
+		addButtons();
+
+	}
+
+	private void addButtons() {
 		btnNext = new JButton("Next");
 		btnNext.setBounds(31, 436, 89, 23);
 		btnNext.addActionListener(this);
@@ -136,7 +133,48 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		buttonRemove.setBounds(437, 177, 111, 23);
 		buttonRemove.addActionListener(this);
 		getContentPane().add(buttonRemove);
+	}
 
+	private void addOptionFields() {
+		option1 = new JFormattedTextField();
+		option1.setBounds(31, 154, 348, 20);
+		getContentPane().add(option1);
+		option1.setEditable(true);
+		
+
+		option2 = new JFormattedTextField();
+		option2.setBounds(31, 206, 348, 20);
+		getContentPane().add(option2);
+		option2.setEditable(true);
+		
+
+		option3 = new JFormattedTextField();
+		option3.setBounds(31, 256, 348, 20);
+		getContentPane().add(option3);
+		option3.setEditable(true);
+		
+		option4 = new JFormattedTextField();
+		option4.setBounds(31, 310, 348, 20);
+		getContentPane().add(option4);
+		option4.setEditable(true);
+	}
+
+	private void setOptionLabels() {
+		JLabel lblOption = new JLabel("Option 1");
+		lblOption.setBounds(31, 129, 76, 14);
+		getContentPane().add(lblOption);
+
+		JLabel lblOption_1 = new JLabel("Option 2");
+		lblOption_1.setBounds(31, 181, 65, 14);
+		getContentPane().add(lblOption_1);
+
+		JLabel lblOption_2 = new JLabel("Option 3");
+		lblOption_2.setBounds(31, 231, 76, 14);
+		getContentPane().add(lblOption_2);
+
+		JLabel lblOption_3 = new JLabel("Option 4");
+		lblOption_3.setBounds(31, 285, 76, 14);
+		getContentPane().add(lblOption_3);
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -146,6 +184,7 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 				question.setTitle(questionTitle.getText());
 				if (question.getOptions() == null)
 					question.setOptionsList();
+<<<<<<< Updated upstream
 				question.getOptions().set(0, option1.getText());
 				question.getOptions().set(1, option2.getText());
 				question.getOptions().set(2, option3.getText());
@@ -153,6 +192,10 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 				String splitter[] = ((String) correctChoice.getSelectedItem()).split(" ");
 				question.setCorrectAnswer(question.getOptions().get(Integer.parseInt(splitter[1]) - 1));
                     								
+=======
+				setQuestion();
+
+>>>>>>> Stashed changes
 				editQuiz.setQuestion(index, question);
 				editQuiz.setIndex(index + 1);
 				editQuiz.startEdit();
@@ -161,6 +204,7 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 
 		}
 		if (e.getSource().equals(btnBack)) {
+<<<<<<< Updated upstream
 			if (e.getActionCommand().equalsIgnoreCase("Back")) {
 
 				if(index>0) {
@@ -175,6 +219,15 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 				editQuiz.setQuestion(index, question);
 				editQuiz.setIndex(index - 1);
 				editQuiz.startEdit();
+=======
+				if (e.getActionCommand().equalsIgnoreCase("Back")) {
+                    if(index>0) {
+					setQuestion();
+					editQuiz.setQuestion(index, question);
+					editQuiz.setIndex(index - 1);
+					editQuiz.startEdit();
+                    }
+>>>>>>> Stashed changes
 				}
 			}
 
@@ -196,5 +249,14 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 			}
 		}
 
+	}
+
+	private void setQuestion() {
+		question.getOptions().set(0,option1.getText());
+		question.getOptions().set(1, option2.getText());
+		question.getOptions().set(2, option3.getText());
+		question.getOptions().set(3, option4.getText());
+		String splitter[] = ((String)correctChoice.getSelectedItem()).split(" ");
+		question.setCorrectAnswer(question.getOptions().get(Integer.parseInt(splitter[1])-1));
 	}
 }

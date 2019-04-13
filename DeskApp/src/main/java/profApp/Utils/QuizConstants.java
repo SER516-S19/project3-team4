@@ -2,6 +2,12 @@ package profApp.Utils;
 
 import javax.swing.Icon;
 
+/**
+ * This class contains constant values used in DeskApp project.
+ *  
+ * @author Kirti Jha and Kumar Prabhu Kalyan.
+ *
+ */
 public class QuizConstants {
 
 	public static String directoryName="D:\\Quizzes";

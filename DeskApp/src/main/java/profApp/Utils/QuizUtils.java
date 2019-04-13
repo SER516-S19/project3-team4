@@ -14,6 +14,12 @@ import com.google.gson.GsonBuilder;
 import profApp.DeskApp.Error.ErrorScreen;
 import profApp.DeskApp.model.Quiz;
 
+/**
+ * This class helps in 1. ParsingJSON. 2. Write to file
+ * 
+ * @author Kirti Jha and Kumar Prabhu Kalyan
+ *
+ */
 public class QuizUtils {
 
 	public static File[] listFiles(String path) {
@@ -31,7 +37,6 @@ public class QuizUtils {
 
 		}
 		return null;
-
 	}
 
 	public static void setErrorDialog(String message) {

@@ -34,34 +34,29 @@ public class SaveDialog extends JDialog implements ActionListener{
 		lblDoYouWish.setBounds(42, 40, 484, 36);
 		getContentPane().add(lblDoYouWish);
 		
-		buttonYes = new JButton("Yes");
-	buttonYes.setBounds(81, 105, 126, 23);
+		buttonYes = createButtons("Yes", 81, 105, 126, 23);
 		getContentPane().add(buttonYes);
-		buttonYes.addActionListener(this);
 		
-		buttonNo = new JButton("No");
-		buttonNo.setBounds(248, 105, 118, 23);
+		buttonNo = createButtons("No",248, 105, 118, 23);
 		getContentPane().add(buttonNo);
-		buttonNo.addActionListener(this);
 		
-		buttonCancel = new JButton("Cancel");
-		buttonCancel.addActionListener(this);
-		buttonCancel.setBounds(399, 105, 110, 23);
+		buttonCancel = createButtons("Cancel", 399, 105, 110, 23);
 		getContentPane().add(buttonCancel);
 		
-		buttonAddQuestion = new JButton("Add Question");
-		
-		buttonAddQuestion.setBounds(104, 170, 163, 23);
-		buttonAddQuestion.addActionListener(this);
+		buttonAddQuestion = createButtons("Add Question", 104, 170, 163, 23);
 		getContentPane().add(buttonAddQuestion);
 		
-	    buttonPreview = new JButton("Preview Quiz");
-		buttonPreview.addActionListener(this);
-		buttonPreview.setBounds(332, 170, 126, 23);
+	    buttonPreview = createButtons("Preview Quiz", 332, 170, 126, 23);
 		getContentPane().add(buttonPreview);
-		
-		
+				
 		this.setVisible(true);
+	}
+	
+	public JButton createButtons(String name,int x, int y,int width, int height) {
+		JButton newButton = new JButton(name);
+		newButton.addActionListener(this);
+		newButton.setBounds(x, y, width, height);		
+		return newButton;
 	}
 
 	public void actionPerformed(ActionEvent event) {
@@ -70,7 +65,6 @@ public class SaveDialog extends JDialog implements ActionListener{
 			if(event.getActionCommand().equalsIgnoreCase("Yes"))
 			editQuizController.writeToFile();
 			editQuizController.disposeWindow();
-			
 			
 		}else {
 			if(event.getSource().equals(buttonNo)) {
@@ -92,9 +86,7 @@ public class SaveDialog extends JDialog implements ActionListener{
 				if(event.getActionCommand().equalsIgnoreCase("Preview Quiz"));
 				OnSavePreviewWindow previewWindow = new OnSavePreviewWindow(editQuizController);
 			}
-			
 		}
 		this.dispose();
-			
 		}
 }

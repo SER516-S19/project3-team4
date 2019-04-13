@@ -45,7 +45,7 @@ public class EditQuizWindow extends JFrame implements ActionListener {
 		editPanel.setLayout(null);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
-		JLabel lblNewLabel = createLabels("Please select quiz to edit!! ");
+		JLabel lblNewLabel = createLabels("Please select a quiz to edit! ");
 		editPanel.add(lblNewLabel);
 		
 		quizSelector = new JComboBox();
@@ -66,7 +66,7 @@ public class EditQuizWindow extends JFrame implements ActionListener {
 		System.out.println(QuizConstants.directoryName);
 		String quizzes [] = new String[listFiles.length];
 		String fileName =null;
-		 mapChoice = new HashMap();
+		mapChoice = new HashMap();
 		int k =0;
 		if(listFiles.length>0) {
 		for(int i=0;i<listFiles.length;i++)
@@ -101,14 +101,14 @@ public class EditQuizWindow extends JFrame implements ActionListener {
 	public JButton createButtons(String name) {
 		JButton newButton = new JButton(name);
 		newButton.addActionListener(this);
-		newButton.setBounds(257, 306, 89, 23);		
+		newButton.setBounds(185, 309, 89, 23);		
 		return newButton;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 	if(e.getSource().equals(btnOk))
 	{
-		if(e.getActionCommand().equalsIgnoreCase("Ok")) {
+		if(e.getActionCommand().equalsIgnoreCase("Done")) {
 			this.dispose();
 			EditQuizController edit = new EditQuizController(mapChoice.get(quizSelector.getSelectedItem()));
 		}

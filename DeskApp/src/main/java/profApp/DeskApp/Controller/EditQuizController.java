@@ -1,6 +1,9 @@
 package profApp.DeskApp.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.rmi.ssl.SslRMIClientSocketFactory;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -16,9 +19,10 @@ public class EditQuizController {
 
 	String filePath;
 	Quiz quiz;
+
 	int index;
 	List<Question> listQuestions;
-	
+
 	EditQuestionWindow currentWindow;
 
 	public EditQuizController(String filePath) {
@@ -28,17 +32,22 @@ public class EditQuizController {
 			quiz = QuizUtils.getJsonStringQuiz(filePath);
 		index = 0;
 		listQuestions = quiz.getQuestionList();
-		
+
 		currentWindow = null;
 		this.startEdit();
 	}
 
 	public void startEdit() {
 
-		if(listQuestions==null && listQuestions.isEmpty()) {
-			SaveDialog save = new SaveDialog(this,QuizConstants.noQuestionMesage);
-		}
-		if (listQuestions.size() > 0 && this.index < listQuestions.size() ) {
+		System.out.println(listQuestions.size());
+		if (listQuestions == null || listQuestions.isEmpty()) {
+
+			System.out.println("No questions");
+			SaveDialog save = new SaveDialog(this, QuizConstants.noQuestionMesage);
+			
+		}else {
+		if (listQuestions.size() > 0 && this.index < listQuestions.size()) {
+			System.out.println(index+":::::::"+listQuestions.size());
 			Question question = listQuestions.get(index);
 			if (currentWindow != null) {
 				currentWindow.dispose();
@@ -48,10 +57,13 @@ public class EditQuizController {
 				currentWindow = new EditQuestionWindow(index, question, this);
 			}
 
-		}
+		}else {
 		if (index >= listQuestions.size()) {
 
-			SaveDialog save = new SaveDialog(this,QuizConstants.saveDialogMessage);
+			System.out.println("Save dialog");
+			SaveDialog save = new SaveDialog(this, QuizConstants.saveDialogMessage);
+		}
+		}
 		}
 	}
 
@@ -59,8 +71,25 @@ public class EditQuizController {
 		this.index = index;
 	}
 
+	public void replaceQuestion(int index, Question question)
+	{
+		System.out.println("Replacing");
+		listQuestions.set(index, question);
+	}
 	public void setQuestion(int index, Question question) {
-		listQuestions.add( question);
+		
+	    if(listQuestions==null || listQuestions.isEmpty() ) {
+	    	System.out.println("Here");
+	    	listQuestions = new ArrayList<Question>();
+	    	listQuestions.add(question);
+	    }else {
+	    	if(index>=listQuestions.size())
+	    		listQuestions.add(question);
+	    	else {
+		System.out.println("Setting");
+		listQuestions.set(index,question);
+	    	}
+	    }
 	}
 
 	public void writeToFile() {
@@ -78,19 +107,21 @@ public class EditQuizController {
 	}
 
 	public void addQuestion() {
-		if(currentWindow!=null)
-		currentWindow.dispose();
-	       currentWindow =  new EditQuestionWindow(index, new Question(), this);
-	       
-		
+		if (currentWindow != null)
+			currentWindow.dispose();
+		currentWindow = new EditQuestionWindow(index, new Question(), this);
+
 	}
 
 	public boolean remove(Question question) {
-	if(listQuestions.contains(question))
-		{listQuestions.remove(question);
-		  return true;
+		if (listQuestions.contains(question)) {
+			listQuestions.remove(question);
+			return true;
 		}
 		return false;
+	}
+	public Quiz getQuiz() {
+		return quiz;
 	}
 
 }

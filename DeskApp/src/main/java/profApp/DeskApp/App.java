@@ -9,8 +9,8 @@ import profApp.DeskApp.Views.ApplicationWindow;
 import profApp.Utils.QuizConstants;
 
 /**
- * Hello world!
- *
+ * Class to select quiz file directory Window
+ * @author kumarkalyan, harshitakajal
  */
 public class App 
 {

@@ -4,7 +4,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 /**
- * A directory chooser UI that allow the user to select the folder containing quiz files
+ * A directory chooser UI that allow the user to select the folder containing quiz files by a UI chooser
  * @author Hongfei Ju
  * @version 1.0
  */

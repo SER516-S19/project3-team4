@@ -10,7 +10,12 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
+/**
+ * This class handles error screen.
+ * 
+ * @author Kumar Kalyan Prabhu and kirti Jha
+ * 
+ */
 public class ErrorScreen extends JDialog {
 
 	private static final long serialVersionUID = 1L;

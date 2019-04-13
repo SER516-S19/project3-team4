@@ -46,7 +46,6 @@ public class EditQuizController {
 
 	/**
 	 * This method allows to edit question window.
-	 * 
 	 * @param
 	 * @return
 	 */
@@ -89,6 +88,7 @@ public class EditQuizController {
 		System.out.println("Replacing");
 		listQuestions.set(index, question);
 	}
+	
 	public void setQuestion(int index, Question question) {
 		
 	    if(listQuestions==null || listQuestions.isEmpty() ) {

@@ -25,6 +25,12 @@ import java.awt.Font;
 import javax.swing.JList;
 import java.awt.Color;
 
+/**
+ * This class provides Edit window after user clicks on edit button.
+ * 
+ * @author Kumar Kalyan and Kirti Jha
+ *
+ */
 public class EditQuizWindow extends JFrame implements ActionListener {
 	
 	JPanel editPanel;
@@ -39,28 +45,19 @@ public class EditQuizWindow extends JFrame implements ActionListener {
 		editPanel.setLayout(null);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
-		JLabel lblNewLabel = new JLabel("Please select quiz to edit :)");
-		lblNewLabel.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 18));
-		lblNewLabel.setBackground(Color.GRAY);
-		lblNewLabel.setBounds(127, 63, 206, 51);
+		JLabel lblNewLabel = createLabels("Please select quiz to edit!! ");
 		editPanel.add(lblNewLabel);
 		
 		quizSelector = new JComboBox();
 		quizSelector.setBounds(155, 194, 138, 33);
 		editPanel.add(quizSelector);
 		
-		 btnOk = new JButton("OK");
-		 btnOk.addActionListener(this);
-		btnOk.setBounds(116, 306, 89, 23);
+		btnOk = createButtons("OK");
 		editPanel.add(btnOk);
 		
-		btnCancel = new JButton("Cancel");
-		btnCancel.addActionListener(this);
-		btnCancel.setBounds(257, 306, 89, 23);
+		btnCancel = createButtons("Cancel");
 		editPanel.add(btnCancel);
-		
-	
-		
+				
 		this.setVisible(true);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setBounds(400, 400, 500, 500);
@@ -82,20 +79,30 @@ public class EditQuizWindow extends JFrame implements ActionListener {
 			quizSelector.addItem(fileName);
 			k++;
 			}
-			
 		}
-		
-		
-		
+				
 		quizSelector.addActionListener(this);
 		editPanel.add(quizSelector);
 		editPanel.setVisible(true);
 		getContentPane().add(editPanel);
 		}else {
 			ErrorScreen error =  new ErrorScreen("No quizzes added, Please add them");
-			
 		}
-		
+	}
+	
+	public JLabel createLabels(String content) {
+		JLabel newLabel = new JLabel(content);
+		newLabel.setFont(new Font("Calibri", Font.BOLD | Font.ITALIC, 18));
+		newLabel.setBackground(Color.GRAY);
+		newLabel.setBounds(127, 63, 206, 51);
+		return newLabel;
+	}
+	
+	public JButton createButtons(String name) {
+		JButton newButton = new JButton(name);
+		newButton.addActionListener(this);
+		newButton.setBounds(257, 306, 89, 23);		
+		return newButton;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
@@ -104,7 +111,6 @@ public class EditQuizWindow extends JFrame implements ActionListener {
 		if(e.getActionCommand().equalsIgnoreCase("Ok")) {
 			this.dispose();
 			EditQuizController edit = new EditQuizController(mapChoice.get(quizSelector.getSelectedItem()));
-			
 		}
 	}
 		if(e.getSource().equals(btnCancel)) {

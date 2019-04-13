@@ -1,8 +1,11 @@
 package profApp.DeskApp.Views;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.UIManager;
 
 import profApp.DeskApp.Controller.EditQuizController;
 import profApp.DeskApp.model.Question;
@@ -49,6 +53,7 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		addButtons();
 
 	}
+	
 
 	private void setCorrectAnswerChoices(Question question) {
 		String choices[] = null;
@@ -124,6 +129,42 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		buttonRemove.setBounds(416, 177, 145, 23);
 		buttonRemove.addActionListener(this);
 		getContentPane().add(buttonRemove);
+		
+		btnNext.addMouseListener(new MouseAdapter() {
+			public void mouseExited(MouseEvent event) {
+				btnNext.setBackground(UIManager.getColor("control"));
+		    }
+		    public void mouseEntered(MouseEvent evt) {
+		    	btnNext.setBackground(Color.GREEN);
+		    }
+		});
+		
+		btnBack.addMouseListener(new MouseAdapter() {
+			public void mouseExited(MouseEvent event) {
+				btnBack.setBackground(UIManager.getColor("control"));
+		    }
+		    public void mouseEntered(MouseEvent evt) {
+		    	btnBack.setBackground(Color.GREEN);
+		    }
+		});
+		
+		btnCancel.addMouseListener(new MouseAdapter() {
+			public void mouseExited(MouseEvent event) {
+				btnCancel.setBackground(UIManager.getColor("control"));
+		    }
+		    public void mouseEntered(MouseEvent evt) {
+		    	btnCancel.setBackground(Color.GREEN);
+		    }
+		});
+		
+		buttonRemove.addMouseListener(new MouseAdapter() {
+			public void mouseExited(MouseEvent event) {
+				buttonRemove.setBackground(UIManager.getColor("control"));
+		    }
+		    public void mouseEntered(MouseEvent evt) {
+		    	buttonRemove.setBackground(Color.GREEN);
+		    }
+		});	
 	}
 
 	private void addOptionFields() {
@@ -174,6 +215,8 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		lblCorrectAnswer.setBounds(31, 364, 97, 14);
 		getContentPane().add(lblCorrectAnswer);
 	}
+	
+	
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(btnNext)) {
@@ -233,4 +276,6 @@ public class EditQuestionWindow extends JFrame implements ActionListener {
 		String splitter[] = ((String) correctChoice.getSelectedItem()).split(" ");
 		question.setCorrectAnswer(question.getOptions().get(Integer.parseInt(splitter[1]) - 1));
 	}
+	
+	
 }
